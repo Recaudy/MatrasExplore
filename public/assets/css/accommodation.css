@@ -1,0 +1,130 @@
+/* Explore Bangka Beaches - Accommodations Pages Stylesheet */
+
+/* List Layout */
+.accommodations-list-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+/* Detail Page Custom Layout */
+.accommodation-detail-container {
+    margin-top: 2rem;
+}
+
+.accommodation-gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    height: 450px;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-md);
+}
+
+.accommodation-gallery-main {
+    width: 100%;
+    height: 100%;
+}
+
+.accommodation-gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.accommodation-gallery-side {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.accommodation-gallery-side-img {
+    width: 100%;
+    height: 100%;
+}
+
+.accommodation-gallery-side-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Accommodation Detail Details */
+.accommodation-detail-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+}
+
+.accommodation-info-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.accommodation-title-area {
+    border-bottom: 1px solid var(--color-light-border);
+    padding-bottom: 1.5rem;
+}
+
+.accommodation-title-area h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.accommodation-price-box {
+    background-color: var(--color-bg-warm);
+    border: 1px solid var(--color-light-border);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.accommodation-price-box .price-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-dark-muted);
+    margin-bottom: 0.5rem;
+}
+
+.accommodation-price-box .price-val {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary-dark);
+    margin-bottom: 1.5rem;
+}
+
+.accommodation-price-box .btn {
+    width: 100%;
+}
+
+/* Amenities Icons */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-light);
+    border: 1px solid var(--color-light-border);
+    border-radius: var(--border-radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.amenity-item svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--color-primary);
+}

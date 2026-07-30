@@ -1,0 +1,168 @@
+/* Explore Bangka Beaches - Map Page Stylesheet */
+
+/* Split Layout */
+.map-page-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: calc(100vh - 73px); /* Subtract header height */
+    position: relative;
+    overflow: hidden;
+}
+
+.map-page-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary-light);
+}
+
+.map-sidebar {
+    background-color: var(--color-white);
+    border-left: 1px solid var(--color-light-border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.map-sidebar-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--color-light-border);
+}
+
+.map-sidebar-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+.map-sidebar-header p {
+    font-size: 0.85rem;
+    color: var(--color-dark-muted);
+}
+
+.map-sidebar-list {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.map-sidebar-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-light-border);
+    border-radius: var(--border-radius-md);
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.map-sidebar-card:hover, .map-sidebar-card.active {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.map-sidebar-card.active {
+    background-color: var(--color-primary-light);
+}
+
+.map-sidebar-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.map-sidebar-card p {
+    font-size: 0.85rem;
+    color: var(--color-dark-muted);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.map-card-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+}
+
+.map-card-meta .meta-label {
+    background-color: var(--color-white);
+    padding: 2px 8px;
+    border-radius: var(--border-radius-full);
+    border: 1px solid rgba(10, 168, 167, 0.2);
+}
+
+/* Custom Leaflet styling overrides to match theme */
+.leaflet-popup-content-wrapper {
+    border-radius: var(--border-radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+    border: 1px solid var(--color-light-border) !important;
+    padding: 4px !important;
+}
+
+.leaflet-popup-content {
+    margin: 12px 16px !important;
+    font-family: var(--font-sans) !important;
+}
+
+.leaflet-popup-tip {
+    background: var(--color-white) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.leaflet-popup-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--color-dark);
+}
+
+.leaflet-popup-desc {
+    font-size: 0.8rem;
+    color: var(--color-dark-muted);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.leaflet-popup-link {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+}
+
+/* Custom Map Icon Marker styling */
+.custom-map-marker {
+    background: var(--color-primary);
+    border: 3px solid var(--color-white);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    width: 32px;
+    height: 32px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-map-marker-inner {
+    width: 10px;
+    height: 10px;
+    background: var(--color-white);
+    border-radius: 50%;
+}
+.custom-map-marker.active {
+    background: #ef4444 !important; /* Red */
+}
+.map-sidebar-card .btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}

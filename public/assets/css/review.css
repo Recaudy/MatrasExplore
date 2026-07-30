@@ -1,0 +1,82 @@
+/* Review & Rating Section Styling */
+
+.reviews-summary-card {
+    background: var(--color-primary-light);
+    border: 1px solid rgba(10, 168, 167, 0.2);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md) !important;
+    border-color: rgba(10, 168, 167, 0.4) !important;
+}
+
+/* Star Rating Radio Buttons (RTL Trick for CSS Hover/Checked) */
+.star-rating-input input[type="radio"]:checked ~ .star-label,
+.star-rating-input .star-label:hover,
+.star-rating-input .star-label:hover ~ .star-label {
+    color: #F59E0B !important;
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Review Modal Popup Animation & Display */
+.review-modal-backdrop.active {
+    display: flex !important;
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+.review-modal-backdrop.active .review-modal-box {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    animation: modalBoxUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalBoxUp {
+    from {
+        transform: translateY(30px) scale(0.96);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .reviews-summary-card {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        padding: 1.5rem !important;
+    }
+
+    .summary-score {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(10, 168, 167, 0.2);
+        padding-right: 0 !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+    .btn-write-review {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .review-modal-box {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}

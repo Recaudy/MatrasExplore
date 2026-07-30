@@ -1,0 +1,945 @@
+/* Explore Bangka Beaches - Home Page Stylesheet */
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    background-color: var(--color-dark);
+    background-image: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.55)), url('../images/destinations/matras.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    color: var(--color-white);
+}
+
+.hero-content {
+    max-width: 650px;
+    padding-bottom: 4rem;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: #f59e0b; /* Yellow dot */
+    border-radius: 50%;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--color-white);
+}
+
+.hero-content h1 .highlight {
+    color: #a5f3fc; /* Cyan-teal glow text */
+}
+
+.hero-content p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.hero-buttons svg, .hero-buttons img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Curve divider at bottom of Hero */
+.hero-curve {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 2;
+}
+
+.hero-curve svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 2px);
+    height: 80px;
+}
+
+.hero-curve path {
+    fill: var(--color-white);
+}
+
+/* Section Headers styling */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+}
+
+.section-header-left {
+    max-width: 600px;
+}
+
+.section-header h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    font-size: 1.05rem;
+    color: var(--color-dark-muted);
+}
+
+/* Destinations Cards Grid */
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.destination-card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-smooth);
+    border: 1px solid var(--color-light-border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.destination-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-premium);
+}
+
+.card-img-wrapper {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.destination-card:hover .card-img-wrapper img {
+    transform: scale(1.08);
+}
+
+.card-rating-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10;
+}
+
+.card-number-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(15, 23, 42, 0.75);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    backdrop-filter: blur(4px);
+}
+
+.card-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-location {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.card-desc {
+    font-size: 0.95rem;
+    color: var(--color-dark-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-meta-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-light-border);
+    margin-bottom: 1.25rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--color-dark-muted);
+}
+
+.meta-item svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--color-primary);
+}
+
+.meta-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta-icons svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--color-primary);
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.card-link:hover {
+    color: var(--color-primary-dark);
+}
+
+.card-link svg {
+    width: 16px;
+    height: 16px;
+    transition: var(--transition-smooth);
+}
+
+.card-link:hover svg {
+    transform: translateX(4px);
+}
+
+/* Gallery Collage Section */
+.gallery-section {
+    background-color: var(--color-bg-cool);
+}
+
+.gallery-section .section-header {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.gallery-section .badge-category {
+    background-color: rgba(10, 168, 167, 0.08);
+}
+
+.gallery-section h2 {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-section p {
+    max-width: 500px;
+    margin: 0 auto 2rem auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 24px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 576px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem !important;
+    }
+}
+
+.gallery-card {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
+    color: var(--color-white);
+    opacity: 0.9;
+    transition: var(--transition-smooth);
+}
+
+.gallery-overlay h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+.gallery-card:hover img {
+    transform: scale(1.06);
+}
+
+.gallery-card:hover .gallery-overlay {
+    background: linear-gradient(transparent, rgba(10, 168, 167, 0.9));
+}
+
+/* Grid Area Mappings matching Figma Visual Journal exactly */
+
+/* Map Section */
+.map-home-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.map-home-preview {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    height: 480px;
+    box-shadow: var(--shadow-lg);
+    background-color: var(--color-primary-light);
+}
+
+.map-placeholder-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+}
+
+.map-home-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 168, 167, 0.15);
+    pointer-events: none;
+}
+
+/* Pins on Home Map Preview */
+.map-pin-badge {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.map-pin-dot {
+    width: 14px;
+    height: 14px;
+    background-color: #f59e0b;
+    border: 3px solid var(--color-white);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.map-pin-label {
+    margin-top: 6px;
+    background-color: var(--color-white);
+    color: var(--color-dark);
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: var(--border-radius-full);
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+}
+
+/* Pin coordinates based on visual alignment in Figma Map Section */
+.pin-matras { top: 35%; left: 35%; }
+.pin-jambosag { top: 50%; left: 65%; }
+.pin-turunaban { top: 68%; left: 45%; }
+
+.map-badge-bottom {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background-color: rgba(15, 23, 42, 0.85);
+    color: var(--color-white);
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-full);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(4px);
+}
+
+.map-badge-bottom::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: #f59e0b;
+    border-radius: 50%;
+}
+
+/* Map Right List */
+.map-home-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.map-external-btn {
+    margin-top: 2rem;
+}
+
+.map-home-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-light-border);
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--border-radius-md);
+    transition: var(--transition-smooth);
+}
+
+.map-home-item:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+
+.map-item-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.map-icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-icon-circle svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+.map-item-text h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.map-item-text p {
+    font-size: 0.85rem;
+    color: var(--color-dark-muted);
+}
+
+.map-item-right svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--color-primary);
+}
+
+/* Accommodation Section */
+.accommodation-section {
+    background-color: var(--color-bg-warm);
+}
+
+.accommodation-section .section-header .badge-category {
+    background-color: rgba(194, 65, 12, 0.08);
+    color: var(--color-accent);
+}
+
+/* Slider Layout */
+.slider-container-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 1rem;
+}
+
+.accommodation-slider {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accommodation-card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-light-border);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.accommodation-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -15px rgba(194, 65, 12, 0.15);
+}
+
+.accommodation-card .card-img-wrapper {
+    height: 200px;
+}
+
+.card-accent-badge {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.card-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.rating-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.rating-stars svg {
+    width: 14px;
+    height: 14px;
+    fill: #f59e0b;
+    stroke: #f59e0b;
+}
+
+.rating-divider {
+    color: var(--color-light-border);
+}
+
+.card-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-light-border);
+    margin-top: auto;
+}
+
+.price-info {
+    font-size: 0.85rem;
+    color: var(--color-dark-muted);
+}
+
+.price-info .amount {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.price-unit {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--color-dark-muted);
+}
+
+.accommodation-card:hover .price-info .amount {
+    color: var(--color-primary-dark);
+}
+/* Gold outline style matching Figma Accommodation page/actions */
+.accommodation-section .btn-outline-accent {
+    border-color: #d97706;
+    color: #d97706;
+}
+.accommodation-section .btn-outline-accent:hover {
+    background-color: #d97706;
+    color: var(--color-white);
+}
+.accommodation-card .btn-book-now {
+    font-size: 0.82rem;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--color-primary), #0d9488);
+    color: #ffffff !important;
+    font-weight: 700;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(10, 168, 167, 0.25);
+}
+.accommodation-card:hover .btn-book-now {
+    background: linear-gradient(135deg, #0d9488, #0f766e);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 168, 167, 0.35);
+}
+
+/* Section jump anchor offset for sticky header */
+#dashboard, #destinations, #gallery, #map, #accommodation, #contact {
+    scroll-margin-top: 90px;
+}
+
+/* 6. Contact Section on Dashboard matching Screenshot 2 */
+.contact-home-section {
+    background-color: var(--color-bg-cool);
+}
+
+.contact-home-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-light-border);
+    background-color: var(--color-white);
+}
+
+.contact-home-left {
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-home-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-dark);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+.contact-home-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-dark-muted);
+    line-height: 1.6;
+    margin-bottom: 2.25rem;
+}
+
+.contact-home-form .form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.contact-home-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+}
+
+.contact-home-form label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.contact-home-form input,
+.contact-home-form textarea {
+    padding: 12px 18px;
+    border: 1px solid var(--color-light-border);
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-dark);
+    background-color: #FAFAFA;
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.contact-home-form input:focus,
+.contact-home-form textarea:focus {
+    border-color: #0096D6;
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(0, 150, 214, 0.15);
+}
+
+.contact-home-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.btn-contact-send {
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--color-primary), #0d9488) !important;
+    color: #ffffff !important;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--border-radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 14px rgba(10, 168, 167, 0.35) !important;
+}
+
+.btn-contact-send:hover {
+    background: linear-gradient(135deg, #0d9488, #0f766e) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(10, 168, 167, 0.45) !important;
+}
+
+.btn-contact-send svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+}
+
+/* Right Panel - Explore Bangka HQ */
+.contact-home-right {
+    background-color: #0B5C71;
+    padding: 3.5rem;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-hq-top {
+    position: relative;
+    z-index: 2;
+}
+
+.badge-hq {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #A5F3FC;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--border-radius-full);
+    margin-bottom: 1rem;
+}
+
+.contact-hq-heading {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-white);
+    line-height: 1.25;
+    margin-bottom: 2.5rem;
+}
+
+.contact-hq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.hq-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+.hq-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #A5F3FC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.hq-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+.hq-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 4px;
+}
+
+.hq-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.contact-hq-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.social-circle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.social-circle-btn:hover {
+    background-color: #A5F3FC;
+    color: #0B5C71;
+    transform: translateY(-3px);
+    border-color: #A5F3FC;
+}
+
+.social-circle-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+}
+
+.contact-hq-bg-circle-1 {
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contact-hq-bg-circle-2 {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06);
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (max-width: 991px) {
+    .contact-home-card {
+        grid-template-columns: 1fr;
+    }
+    .contact-home-left, .contact-home-right {
+        padding: 2.5rem 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-home-form .form-group-row {
+        grid-template-columns: 1fr;
+    }
+    .contact-home-left, .contact-home-right {
+        padding: 1.75rem 1.25rem;
+    }
+}

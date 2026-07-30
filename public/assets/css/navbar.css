@@ -1,0 +1,150 @@
+/* Explore Bangka Beaches - Navbar Stylesheet */
+
+.header-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+    background-color: transparent;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid transparent;
+}
+
+/* Translucent Scrolled Navbar State */
+.header-nav.scrolled {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1rem 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Transparent Background for Scrolled Dark Mode On Homepage */
+.header-nav.scrolled.home-page {
+    border-bottom: 1px solid rgba(10, 168, 167, 0.05);
+}
+
+.header-nav.interior-page {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-light-border);
+    position: sticky;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-white);
+}
+
+.logo img, .logo svg {
+    width: 32px;
+    height: 32px;
+}
+
+.logo span {
+    font-weight: 400;
+}
+
+.logo .highlight {
+    color: var(--color-primary);
+    font-weight: 800;
+}
+
+/* On Scrolled State or Interior Pages, Logo text is Dark */
+.header-nav.scrolled .logo,
+.header-nav.interior-page .logo {
+    color: var(--color-dark);
+}
+
+/* Nav Menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+    list-style: none;
+}
+
+.nav-link {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    padding: 6px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover {
+    color: var(--color-white);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--color-white);
+}
+
+/* On Scrolled State or Interior Pages, Nav Menu links are Slate */
+.header-nav.scrolled .nav-link,
+.header-nav.interior-page .nav-link {
+    color: var(--color-dark-muted);
+}
+
+.header-nav.scrolled .nav-link:hover,
+.header-nav.scrolled .nav-link.active,
+.header-nav.interior-page .nav-link:hover,
+.header-nav.interior-page .nav-link.active {
+    color: var(--color-primary);
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    position: relative;
+    z-index: 1001;
+}
+
+.mobile-toggle svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--color-white);
+    transition: var(--transition-smooth);
+}
+
+.header-nav.scrolled .mobile-toggle svg,
+.header-nav.interior-page .mobile-toggle svg {
+    stroke: var(--color-dark);
+}

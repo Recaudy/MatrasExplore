@@ -1,0 +1,65 @@
+/* User Contributed Gallery Styling */
+
+.user-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+.user-photo-card {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.user-photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.user-photo-card:hover img {
+    transform: scale(1.08) !important;
+}
+
+.user-photo-card:hover .photo-tile-overlay {
+    opacity: 1 !important;
+}
+
+.custom-file-dropzone:hover {
+    background: #ccfbf1 !important;
+    border-color: var(--color-primary) !important;
+}
+
+/* Modal Animation for Gallery & Lightbox */
+#galleryModal.active,
+#photoDetailModal.active {
+    display: flex !important;
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+#galleryModal.active .review-modal-box,
+#photoDetailModal.active .photo-lightbox-box {
+    transform: scale(1) !important;
+    opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+    .user-photos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+
+    .user-photo-card {
+        height: 200px !important;
+    }
+
+    .photo-lightbox-box {
+        grid-template-columns: 1fr !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+
+    .photo-lightbox-box > div:first-child {
+        min-height: 250px !important;
+        max-height: 300px !important;
+    }
+}

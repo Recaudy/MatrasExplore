@@ -1,0 +1,153 @@
+/* Explore Bangka Beaches - Contact Page Stylesheet */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+}
+
+/* Contact Info Column */
+.contact-info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.contact-info-heading h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+}
+
+.contact-info-heading p {
+    font-size: 1.05rem;
+    color: var(--color-dark-muted);
+}
+
+.contact-cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-info-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    background-color: var(--color-light);
+    border: 1px solid var(--color-light-border);
+    padding: 1.5rem 1.75rem;
+    border-radius: var(--border-radius-lg);
+    transition: var(--transition-smooth);
+}
+
+.contact-info-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-info-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-info-card-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+}
+
+.contact-info-card-text h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.contact-info-card-text p {
+    font-size: 0.95rem;
+    color: var(--color-dark-muted);
+    line-height: 1.5;
+}
+
+/* Contact Form Column */
+.contact-form-panel {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-light-border);
+    padding: 3rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.form-group-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-dark);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px 20px;
+    border: 1px solid var(--color-light-border);
+    background-color: var(--color-light);
+    border-radius: var(--border-radius-md);
+    outline: none;
+    transition: var(--transition-smooth);
+    color: var(--color-dark);
+    font-size: 0.95rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-primary);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(10, 168, 167, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Success and Error Feedback Alert Badges */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #15803d;
+}
+
+.alert-danger {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
