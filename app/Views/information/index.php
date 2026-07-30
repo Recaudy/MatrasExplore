@@ -4,7 +4,6 @@
 <!-- Information Header -->
 <section class="page-header">
     <div class="container text-center">
-        <span class="badge-category">Pusat Informasi</span>
         <h1 style="margin-bottom: 1rem;">Harga Sewa & Fasilitas</h1>
         <p class="page-header-desc">Temukan informasi terkait daftar harga sewa, fasilitas, aturan, dan panduan lainnya seputar Pantai Matras. Klik pada gambar untuk memperbesar.</p>
     </div>

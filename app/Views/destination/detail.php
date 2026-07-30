@@ -41,11 +41,7 @@
                     <p class="detail-text"><?= esc($destination['description']) ?></p>
                 </div>
 
-                <!-- History -->
-                <div class="reveal">
-                    <h2 class="detail-section-title">Sejarah & Daya Tarik</h2>
-                    <p class="detail-text"><?= esc($destination['history']) ?></p>
-                </div>
+
 
                 <!-- Slideshow -->
                 <?php if (!empty($images)): ?>
@@ -391,13 +387,13 @@
             <!-- Judul Foto -->
             <div style="margin-bottom: 1.1rem;">
                 <label for="galleryTitle" style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--color-dark); margin-bottom: 6px;">Judul Foto / Gambar <span style="color: #ef4444;">*</span></label>
-                <input type="text" id="galleryTitle" name="title" required placeholder="Contoh: Senja Memukau di Pantai Matras" style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc;" value="<?= esc(old('title')) ?>">
+                <input type="text" id="galleryTitle" name="title" required maxlength="50" placeholder="Contoh: Senja Memukau di Pantai Matras" style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc;" value="<?= esc(old('title')) ?>">
             </div>
 
             <!-- Deskripsi Foto -->
             <div style="margin-bottom: 1.25rem;">
                 <label for="galleryDescription" style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--color-dark); margin-bottom: 6px;">Deskripsi Singkat <span style="color: #ef4444;">*</span></label>
-                <textarea id="galleryDescription" name="description" required rows="3" placeholder="Ceritakan di mana foto diambil, waktu pengambilan, ataupun momen seru di baliknya..." style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc; font-family: inherit; resize: vertical;"><?= esc(old('description')) ?></textarea>
+                <textarea id="galleryDescription" name="description" required rows="3" maxlength="200" placeholder="Ceritakan di mana foto diambil, waktu pengambilan, ataupun momen seru di baliknya..." style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc; font-family: inherit; resize: vertical;"><?= esc(old('description')) ?></textarea>
             </div>
 
             <!-- Pilih Gambar (File Input) -->

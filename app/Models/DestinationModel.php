@@ -12,7 +12,7 @@ class DestinationModel extends Model
     protected $returnType       = 'array';
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'name', 'slug', 'description', 'history', 'location', 
+        'name', 'slug', 'description', 'location', 
         'latitude', 'longitude', 'opening_hours', 'ticket_price', 'status', 'created_at'
     ];
 

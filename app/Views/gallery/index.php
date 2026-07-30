@@ -151,13 +151,13 @@
             <!-- Judul Foto -->
             <div style="margin-bottom: 1.1rem;">
                 <label for="homeGalleryTitle" style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--color-dark); margin-bottom: 6px;">Judul Foto / Gambar <span style="color: #ef4444;">*</span></label>
-                <input type="text" id="homeGalleryTitle" name="title" required placeholder="Contoh: Senja Memukau di Pantai Matras" style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc;">
+                <input type="text" id="homeGalleryTitle" name="title" required maxlength="50" placeholder="Contoh: Senja Memukau di Pantai Matras" style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc;">
             </div>
 
             <!-- Deskripsi Foto -->
             <div style="margin-bottom: 1.25rem;">
                 <label for="homeGalleryDescription" style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--color-dark); margin-bottom: 6px;">Deskripsi Singkat <span style="color: #ef4444;">*</span></label>
-                <textarea id="homeGalleryDescription" name="description" required rows="3" placeholder="Ceritakan di mana foto diambil, waktu pengambilan, ataupun momen seru di baliknya..." style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc; font-family: inherit; resize: vertical;"></textarea>
+                <textarea id="homeGalleryDescription" name="description" required maxlength="200" rows="3" placeholder="Ceritakan di mana foto diambil, waktu pengambilan, ataupun momen seru di baliknya..." style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc; font-family: inherit; resize: vertical;"></textarea>
             </div>
 
             <!-- Pilih Gambar (File Input) -->

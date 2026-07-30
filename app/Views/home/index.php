@@ -44,9 +44,8 @@
     <div class="container">
         <div class="section-header reveal">
             <div class="section-header-left">
-                <h2>Tiga Garis Pantai. Tiga Pilihan Wisata.</h2>
-                <p>Pilih suasana liburan impian Anda: ramai dan ceria, tenang dan alami, atau dikelilingi bebatuan
-                    granit eksotis dan matahari terbenam.</p>
+                <h2>Temukan Pantai Favorit Anda</h2>
+                <p>Setiap pantai menawarkan pengalaman yang unik, mulai dari suasana yang tenang hingga aktivitas wisata yang seru</p>
             </div>
             <a href="#map" class="btn btn-outline-primary">
                 Jelajahi Peta Wisata
@@ -103,7 +102,7 @@
 </section>
 
 <!-- 3. Gallery Section -->
-<section class="section-padding gallery-section" id="gallery">
+<section class="section-padding gallery-section" style="background-color: var(--color-bg-cool);" id="gallery">
     <div class="container">
         <?php if (session()->getFlashdata('gallery_success')): ?>
         <div
@@ -122,9 +121,8 @@
         <?php endif; ?>
 
         <div class="section-header reveal">
-            <h2>Keindahan Laut & Mentari di Ujung Cakrawala.</h2>
-            <p>Kumpulan potret pesona pantai dari Explore Bangka serta kiriman foto dari para pengunjung setia — gulir
-                atau klik gambar untuk melihat momen lebih dekat.</p>
+            <h2>Keindahan Laut & Mentari di Ujung Cakrawala</h2>
+            <p>Kumpulan potret pesona pantai dari Explore Bangka serta kiriman foto dari para pengunjung setia</p>
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
                 <button type="button" class="btn btn-primary" onclick="openHomeGalleryModal()"
                     style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 12px 24px; box-shadow: var(--shadow-md);">
@@ -221,12 +219,12 @@
 </section>
 
 <!-- 3b. Information Section -->
-<section class="section-padding" style="background-color: var(--color-light-bg);" id="informasi">
+<section class="section-padding" id="informasi">
     <div class="container">
         <div class="section-header reveal">
             <div class="section-header-left">
-                <h2>Pusat Informasi & Harga Sewa.</h2>
-                <p>Temukan informasi terkait daftar harga sewa fasilitas, aturan, dan panduan wisata lainnya. Klik gambar untuk memperbesar.</p>
+                <h2>Pusat Informasi</h2>
+                <p>Temukan informasi terkait daftar harga sewa fasilitas, aturan, dan panduan wisata lainnya</p>
             </div>
             <a href="<?= base_url('informasi') ?>" class="btn btn-outline-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 12px 24px;">
                 Lihat Semua Informasi
@@ -349,7 +347,7 @@
                 <label for="homeGalleryTitle"
                     style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--color-dark); margin-bottom: 6px;">Judul
                     Foto / Gambar <span style="color: #ef4444;">*</span></label>
-                <input type="text" id="homeGalleryTitle" name="title" required
+                <input type="text" id="homeGalleryTitle" name="title" required maxlength="50"
                     placeholder="Contoh: Senja Memukau di Pantai Matras"
                     style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc;">
             </div>
@@ -359,7 +357,7 @@
                 <label for="homeGalleryDescription"
                     style="display: block; font-size: 0.9rem; font-weight: 700; color: var(--color-dark); margin-bottom: 6px;">Deskripsi
                     Singkat <span style="color: #ef4444;">*</span></label>
-                <textarea id="homeGalleryDescription" name="description" required rows="3"
+                <textarea id="homeGalleryDescription" name="description" required rows="3" maxlength="200"
                     placeholder="Ceritakan di mana foto diambil, waktu pengambilan, ataupun momen seru di baliknya..."
                     style="width: 100%; padding: 11px 16px; border: 1px solid var(--color-light-border); border-radius: var(--border-radius-md); font-size: 0.95rem; transition: all 0.2s; background: #f8fafc; font-family: inherit; resize: vertical;"></textarea>
             </div>
@@ -416,7 +414,7 @@
 </div>
 
 <!-- 4. Map Section -->
-<section class="section-padding" id="map">
+<section class="section-padding" style="background-color: var(--color-bg-cool);" id="map">
     <div class="container">
         <div class="map-home-grid">
             <div class="map-home-preview reveal"
@@ -439,10 +437,10 @@
             </div>
 
             <div class="reveal">
-                <h2>Akses Mudah & Dekat dari Kota.</h2>
-                <p style="margin-bottom: 2rem;">Mulai perjalanan dari Sungailiat dan jelajahi pesisir pantai sesuai
+                <h2>Akses Mudah & Dekat dari Kota</h2>
+                <p style="margin-bottom: 2rem;">Mulai perjalanan dan jelajahi pesisir pantai sesuai
                     ritme Anda. Setiap titik lokasi menawarkan ketenangan tersendiri. Klik destinasi di bawah untuk
-                    melihat lokasinya di peta.</p>
+                    melihat lokasinya di peta</p>
 
                 <div class="map-home-list">
                     <?php foreach ($destinations as $dest): ?>
@@ -500,9 +498,7 @@
         <div class="contact-home-card reveal">
             <div class="contact-home-left">
                 <h2 class="contact-home-title">Rencanakan Liburan Impian Anda di Bangka.</h2>
-                <p class="contact-home-subtitle">Punya pertanyaan atau butuh rekomendasi wisata lokal? Kami siap
-                    membantu merencanakan liburan terbaik Anda.</p>
-
+              
                 <!-- Flash Messages if redirected -->
                 <?php if (session()->getFlashdata('success')): ?>
                 <div class="alert alert-success">

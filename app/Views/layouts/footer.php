@@ -11,7 +11,7 @@ $isHome = url_is('/');
                     <div>Explore<span class="highlight">Matras</span></div>
                 </a>
                 <p class="footer-desc">
-                    Menjelajahi pesona alam Pulau Bangka: keindahan pesisir pantai, ketenangan alam, dan keramahan lokal yang menjadikan setiap perjalanan begitu berkesan.
+                    Menjelajahi pesona Kawasan Wisata Pantai Matras dengan keindahan pesisir, suasana yang menenangkan, dan berbagai pengalaman wisata yang membuat setiap kunjungan semakin berkesan.
                 </p>
             </div>
 
@@ -30,7 +30,7 @@ $isHome = url_is('/');
 
             <!-- Popular Shores -->
             <div class="footer-col">
-                <h4>PANTAI POPULER</h4>
+                <h4>PANTAI </h4>
                 <ul class="footer-links">
                     <li><a href="<?= base_url('destinations/pantai-matras') ?>">Pantai Matras</a></li>
                     <li><a href="<?= base_url('destinations/pantai-jambosag') ?>">Pantai Jambosag</a></li>
@@ -45,7 +45,7 @@ $isHome = url_is('/');
                 &copy; <?= date('Y') ?> Explore Matras. Semua Hak Dilindungi.
             </div>
             <div class="footer-tagline">
-                Jelajahi keindahan alam &bull; Jaga kelestarian pantai
+                Jelajahi keindahan alam & Jaga kelestarian pantai
             </div>
         </div>
     </div>

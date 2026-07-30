@@ -196,10 +196,7 @@
                 <textarea name="description" class="form-control-custom" rows="4" required placeholder="Deskripsikan keindahan dan daya tarik utama pantai ini..."><?= esc($destination['description'] ?? '') ?></textarea>
             </div>
 
-            <div class="form-group-custom">
-                <label>Sejarah & Keunikan (History & Heritage) <span style="color: #ef4444;">*</span></label>
-                <textarea name="history" class="form-control-custom" rows="4" required placeholder="Ceritakan sejarah singkat atau fakta unik tentang pantai ini..."><?= esc($destination['history'] ?? '') ?></textarea>
-            </div>
+
 
             <div class="section-title" style="margin-top: 2.5rem;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
