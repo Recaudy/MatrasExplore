@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\DestinationModel;
 use App\Models\DestinationUserGalleryModel;
-use App\Models\AccommodationModel;
 use App\Models\GalleryModel;
 
 class Home extends BaseController
@@ -13,7 +12,6 @@ class Home extends BaseController
     {
         $destModel = new DestinationModel();
         $galleryModel = new GalleryModel();
-        $accModel = new AccommodationModel();
 
         // 1. Get all active destinations and attach facilities + cover image + rating
         $destinations = $destModel->where('status', 'active')->findAll();
