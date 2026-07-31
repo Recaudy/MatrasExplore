@@ -720,12 +720,34 @@ class Admin extends BaseController
         // Fetch logs for today
         $history = $entranceModel->like('created_at', $today)->orderBy('id', 'DESC')->findAll();
 
-        // Chart Data - Last 7 days
+        // Custom Filter Logic
+        $filterStart = $this->request->getGet('start_date');
+        $filterEnd = $this->request->getGet('end_date');
+
+        // Chart Data - Last 7 days or Custom
         $chartDataDay = ['labels' => [], 'data' => []];
-        for ($i = 6; $i >= 0; $i--) {
-            $date = date('Y-m-d', strtotime("-$i days"));
-            $chartDataDay['labels'][] = date('d M', strtotime($date));
-            $chartDataDay['data'][] = $getTotal($date);
+        if ($filterStart && $filterEnd) {
+            try {
+                $begin = new \DateTime($filterStart);
+                $end = new \DateTime($filterEnd);
+                $end->modify('+1 day');
+                $interval = \DateInterval::createFromDateString('1 day');
+                $period = new \DatePeriod($begin, $interval, $end);
+
+                foreach ($period as $dt) {
+                    $date = $dt->format("Y-m-d");
+                    $chartDataDay['labels'][] = $dt->format("d M");
+                    $chartDataDay['data'][] = $getTotal($date);
+                }
+            } catch (\Exception $e) {
+                // fallback
+            }
+        } else {
+            for ($i = 6; $i >= 0; $i--) {
+                $date = date('Y-m-d', strtotime("-$i days"));
+                $chartDataDay['labels'][] = date('d M', strtotime($date));
+                $chartDataDay['data'][] = $getTotal($date);
+            }
         }
 
         // Chart Data - Last 4 weeks
@@ -880,5 +902,87 @@ class Admin extends BaseController
         }
 
         return redirect()->back()->with('error', 'Data tidak ditemukan.');
+    }
+
+    public function exportEntrance()
+    {
+        if (!$this->checkAuth()) return redirect()->to(base_url('auth/login'));
+
+        $entranceModel = new \App\Models\EntranceLogModel();
+        
+        $filterStart = $this->request->getGet('start_date');
+        $filterEnd = $this->request->getGet('end_date');
+        $groupBy = $this->request->getGet('group_by');
+
+        $builder = $entranceModel->builder();
+        
+        if ($filterStart && $filterEnd) {
+            $builder->where('created_at >=', $filterStart . ' 00:00:00')
+                    ->where('created_at <=', $filterEnd . ' 23:59:59');
+            $filename = 'Data_Pengunjung_' . $filterStart . '_sd_' . $filterEnd;
+        } else {
+            $filename = 'Data_Pengunjung_Keseluruhan';
+        }
+
+        if ($groupBy === 'day') {
+            $builder->select('DATE(created_at) as period, SUM(amount) as total');
+            $builder->groupBy('DATE(created_at)');
+            $filename .= '_Per_Hari.csv';
+            $header = ['No', 'Tanggal', 'Total Pengunjung'];
+        } elseif ($groupBy === 'week') {
+            $builder->select('YEARWEEK(created_at, 1) as period, SUM(amount) as total');
+            $builder->groupBy('YEARWEEK(created_at, 1)');
+            $filename .= '_Per_Minggu.csv';
+            $header = ['No', 'Tahun & Minggu Ke-', 'Total Pengunjung'];
+        } elseif ($groupBy === 'month') {
+            $builder->select('DATE_FORMAT(created_at, "%Y-%m") as period, SUM(amount) as total');
+            $builder->groupBy('DATE_FORMAT(created_at, "%Y-%m")');
+            $filename .= '_Per_Bulan.csv';
+            $header = ['No', 'Bulan', 'Total Pengunjung'];
+        } elseif ($groupBy === 'year') {
+            $builder->select('YEAR(created_at) as period, SUM(amount) as total');
+            $builder->groupBy('YEAR(created_at)');
+            $filename .= '_Per_Tahun.csv';
+            $header = ['No', 'Tahun', 'Total Pengunjung'];
+        } else {
+            // Raw logs
+            $builder->select('created_at as period, amount, total_after');
+            $filename .= '.csv';
+            $header = ['No', 'Tanggal Waktu', 'Penambahan Pengunjung', 'Total Akumulasi'];
+        }
+        
+        $builder->orderBy('period', 'ASC');
+        $logs = $builder->get()->getResultArray();
+
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename=' . $filename);
+
+        $output = fopen('php://output', 'w');
+        // Add UTF-8 BOM for Excel
+        fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
+        
+        // Use semicolon delimiter for Indonesian/European Excel locales
+        fputcsv($output, $header, ';');
+
+        $no = 1;
+        foreach ($logs as $log) {
+            if (in_array($groupBy, ['day', 'week', 'month', 'year'])) {
+                fputcsv($output, [
+                    $no++,
+                    $log['period'],
+                    $log['total']
+                ], ';');
+            } else {
+                fputcsv($output, [
+                    $no++,
+                    $log['period'],
+                    $log['amount'],
+                    $log['total_after']
+                ], ';');
+            }
+        }
+
+        fclose($output);
+        exit;
     }
 }

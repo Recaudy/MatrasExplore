@@ -327,10 +327,29 @@
             <h3>Statistik Pengunjung</h3>
             <p>Grafik jumlah pengunjung berdasarkan periode waktu.</p>
         </div>
-        <div class="chart-filters">
-            <button class="btn-filter active" onclick="updateChart('day', this)">7 Hari Terakhir</button>
-            <button class="btn-filter" onclick="updateChart('week', this)">4 Minggu Terakhir</button>
-            <button class="btn-filter" onclick="updateChart('month', this)">Tahun Ini</button>
+        <div class="chart-filters" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: flex-end;">
+            <form method="get" action="<?= base_url('admin/entrance') ?>" style="display: flex; gap: 8px; align-items: center; margin-right: 1rem;">
+                <input type="date" name="start_date" style="padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem;" value="<?= esc($_GET['start_date'] ?? '') ?>" required>
+                <span style="color: #64748b; font-size: 0.85rem;">-</span>
+                <input type="date" name="end_date" style="padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem;" value="<?= esc($_GET['end_date'] ?? '') ?>" required>
+                <button type="submit" style="padding: 6px 12px; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Filter</button>
+                <?php if(isset($_GET['start_date'])): ?>
+                    <a href="<?= base_url('admin/entrance') ?>" style="padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Reset</a>
+                <?php endif; ?>
+            </form>
+            
+            <button onclick="document.getElementById('exportModal').style.display='flex'" style="padding: 6px 12px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; margin-right: 1rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="16" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Export Excel
+            </button>
+            
+            <?php if(!isset($_GET['start_date'])): ?>
+                <button class="btn-filter active" onclick="updateChart('day', this)">7 Hari Terakhir</button>
+                <button class="btn-filter" onclick="updateChart('week', this)">4 Minggu Terakhir</button>
+                <button class="btn-filter" onclick="updateChart('month', this)">Tahun Ini</button>
+            <?php else: ?>
+                <button class="btn-filter active" onclick="updateChart('day', this)">Hasil Filter</button>
+            <?php endif; ?>
         </div>
     </div>
     <div class="chart-container">
@@ -385,6 +404,43 @@
     </div>
 </div>
 
+<!-- Export Modal -->
+<div id="exportModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 2rem; border-radius: 12px; width: 400px; max-width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0; margin-bottom: 1.5rem; color: #1e293b; display: flex; justify-content: space-between; align-items: center;">
+            Export Data Pengunjung
+            <button type="button" onclick="document.getElementById('exportModal').style.display='none'" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #94a3b8;">&times;</button>
+        </h3>
+        <form method="get" action="<?= base_url('admin/entrance/export') ?>">
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #475569; font-weight: 500; font-size: 0.9rem;">Mulai Tanggal (Opsional)</label>
+                <input type="date" name="start_date" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px;" value="<?= esc($_GET['start_date'] ?? '') ?>">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #475569; font-weight: 500; font-size: 0.9rem;">Sampai Tanggal (Opsional)</label>
+                <input type="date" name="end_date" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px;" value="<?= esc($_GET['end_date'] ?? '') ?>">
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: #475569; font-weight: 500; font-size: 0.9rem;">Kelompokkan Data (Per)</label>
+                <select name="group_by" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; color: #1e293b;">
+                    <option value="raw">Log Mentah (Seluruh Catatan)</option>
+                    <option value="day">Per Hari</option>
+                    <option value="week">Per Minggu</option>
+                    <option value="month">Per Bulan</option>
+                    <option value="year">Per Tahun</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button type="button" onclick="document.getElementById('exportModal').style.display='none'" style="padding: 10px 16px; background: #f1f5f9; color: #475569; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Batal</button>
+                <button type="submit" onclick="document.getElementById('exportModal').style.display='none'" style="padding: 10px 16px; background: #10b981; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="16" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Download Excel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const chartDataDay = <?= json_encode($chart_day) ?>;
@@ -432,9 +488,13 @@
                     },
                     tooltip: {
                         backgroundColor: '#1e293b',
-                        padding: 12,
-                        titleFont: { size: 13 },
-                        bodyFont: { size: 14, weight: 'bold' },
+                        padding: 16,
+                        titleFont: { size: 13, weight: 'normal' },
+                        titleColor: '#94a3b8',
+                        titleMarginBottom: 8,
+                        bodyFont: { size: 16, weight: 'bold' },
+                        bodyColor: '#ffffff',
+                        cornerRadius: 8,
                         displayColors: false,
                         callbacks: {
                             label: function(context) {

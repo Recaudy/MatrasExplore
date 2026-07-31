@@ -15,7 +15,7 @@
         <?php endif; ?>
 
         <h1 style="margin-bottom: 1rem;">Galeri Pesona Pantai & Kiriman Pengguna</h1>
-        <p class="page-header-desc">Kumpulan potret keindahan alam, pemandangan laut jernih, dan momen tak terlupakan dari pesisir Pulau Bangka serta kontribusi foto dari para pengunjung. Klik pada gambar untuk melihat tampilan ukuran penuh.</p>
+        <p class="page-header-desc">Kumpulan potret pesona pantai dari Explore Bangka serta kiriman foto dari para pengunjung setia</p>
         <div style="margin-top: 1.5rem;">
             <button type="button" class="btn btn-primary" onclick="openHomeGalleryModal()" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 12px 24px; box-shadow: var(--shadow-md);">
                  Kirimkan Gambar

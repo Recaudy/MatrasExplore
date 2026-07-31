@@ -8,7 +8,7 @@
     <title><?= esc($title ?? 'Explore Bangka Beaches - Tourism Information System') ?></title>
     
     <!-- Base URL for Assets -->
-    <link rel="icon" type="image/png" href="<?= base_url('assets/images/logo/logo.png') ?>">
+    <link rel="icon" type="image/png" href="<?= base_url('uploads/favicon/MatrasExplore.png') ?>">
 
     <!-- Leaflet.js Mapping Library CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

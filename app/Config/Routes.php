@@ -90,4 +90,5 @@ $routes->post('gallery/bulk-update-dashboard', 'Admin::bulkUpdateDashboard');
     $routes->get('entrance', 'Admin::entrance');
     $routes->post('entrance/add', 'Admin::addEntrance');
     $routes->post('entrance/reset', 'Admin::resetEntrance');
+    $routes->get('entrance/export', 'Admin::exportEntrance');
 });

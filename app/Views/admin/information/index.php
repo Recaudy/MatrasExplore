@@ -46,12 +46,12 @@
                                 </td>
                                 <td style="text-align: right;">
                                     <div style="display: flex; gap: 8px; justify-content: flex-end;">
-                                        <button type="button" class="btn btn-sm" style="background: #f1f5f9; color: #475569;" 
+                                        <button type="button" class="btn btn-sm btn-edit" 
                                                 onclick="openEditModal(<?= $item['id'] ?>, '<?= htmlspecialchars(addslashes($item['title'])) ?>', '<?= htmlspecialchars(addslashes($item['description'] ?? '')) ?>')">
                                             Edit
                                         </button>
                                         <a href="<?= base_url('admin/information/delete/' . $item['id']) ?>" 
-                                           class="btn btn-sm btn-danger" 
+                                           class="btn btn-sm btn-delete" 
                                            onclick="return confirm('Hapus informasi ini secara permanen?')">
                                             Hapus
                                         </a>
