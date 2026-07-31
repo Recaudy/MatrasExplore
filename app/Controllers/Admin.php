@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\DestinationModel;
 use App\Models\DestinationUserGalleryModel;
-use App\Models\AccommodationModel;
+
 use App\Models\ReviewModel;
 use App\Models\GalleryModel;
 
@@ -29,7 +29,7 @@ class Admin extends BaseController
 
         $destModel = new DestinationModel();
         $galleryModel = new DestinationUserGalleryModel();
-        $accModel = new AccommodationModel();
+
         $reviewModel = new ReviewModel();
         $userPhotoModel = new DestinationUserGalleryModel();
         $visitorModel = new \App\Models\VisitorModel();
@@ -38,7 +38,6 @@ class Admin extends BaseController
         $stats = [
             'total_destinations' => $destModel->countAllResults(),
             'total_gallery'      => $galleryModel->countAllResults(),
-            'total_accommodations' => $accModel->countAllResults(),
             'total_contacts'     => $db->table('contact_messages')->countAllResults(),
             'pending_reviews'    => $reviewModel->where('status', 'pending')->countAllResults(),
             'pending_photos'     => $userPhotoModel->where('status', 'pending')->countAllResults(),
