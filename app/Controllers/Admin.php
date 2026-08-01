@@ -984,4 +984,47 @@ class Admin extends BaseController
         fclose($output);
         exit;
     }
+
+    // ==========================================
+    // Shorts Management
+    // ==========================================
+    public function shorts()
+    {
+        $shortModel = new \App\Models\ShortModel();
+        $data = [
+            'title'      => 'Kelola Video Shorts - Admin Panel',
+            'header_title' => 'Manajemen Video Shorts',
+            'active_tab' => 'shorts',
+            'shorts'     => $shortModel->orderBy('id', 'DESC')->findAll()
+        ];
+        return view('admin/shorts', $data);
+    }
+
+    public function saveShort()
+    {
+        $shortModel = new \App\Models\ShortModel();
+        
+        $id = $this->request->getPost('id');
+        
+        $data = [
+            'title'       => $this->request->getPost('title'),
+            'youtube_url' => $this->request->getPost('youtube_url'),
+            'description' => $this->request->getPost('description')
+        ];
+
+        if ($id) {
+            $shortModel->update($id, $data);
+            return redirect()->to('admin/shorts')->with('success', 'Video short berhasil diperbarui.');
+        } else {
+            $shortModel->insert($data);
+            return redirect()->to('admin/shorts')->with('success', 'Video short berhasil ditambahkan.');
+        }
+    }
+
+    public function deleteShort($id)
+    {
+        $shortModel = new \App\Models\ShortModel();
+        $shortModel->delete($id);
+        return redirect()->to('admin/shorts')->with('success', 'Video short berhasil dihapus.');
+    }
 }

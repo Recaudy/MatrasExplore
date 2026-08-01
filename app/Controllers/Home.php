@@ -70,6 +70,10 @@ class Home extends BaseController
         $infoModel = new \App\Models\InformationModel();
         $information = $infoModel->orderBy('id', 'DESC')->findAll(8);
 
+        // Fetch Shorts
+        $shortModel = new \App\Models\ShortModel();
+        $shorts = $shortModel->orderBy('id', 'DESC')->findAll(4);
+
         $settingModel = new \App\Models\SettingModel();
         $settings = $settingModel->getAllSettingsAsMap();
 
@@ -79,8 +83,9 @@ class Home extends BaseController
             'destinations' => $destinations,
             'gallery' => $gallery,
             'information' => $information,
+            'shorts' => $shorts,
             'settings' => $settings,
-            'pageStyles' => ['home.css', 'map.css', 'gallery.css'],
+            'pageStyles' => ['home.css', 'map.css', 'gallery.css', 'shorts.css'],
             'pageScripts' => ['gallery.js', 'slider.js', 'map.js']
         ];
 

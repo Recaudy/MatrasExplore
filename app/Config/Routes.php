@@ -17,6 +17,9 @@ $routes->get('gallery', 'Gallery::index');
 
 $routes->get('gallery/(:segment)', 'Gallery::detail/$1');
 
+// Shorts
+$routes->get('shorts', 'Shorts::index');
+
 // Informasi
 $routes->get('informasi', 'Information::index');
 
@@ -56,6 +59,11 @@ $routes->group('admin', function ($routes) {
     $routes->get('gallery/delete/(:num)', 'Admin::deleteGallery/$1');
 $routes->post('gallery/bulk-delete', 'Admin::bulkDeleteGallery');
 $routes->post('gallery/bulk-update-dashboard', 'Admin::bulkUpdateDashboard');
+
+    // Shorts Management
+    $routes->get('shorts', 'Admin::shorts');
+    $routes->post('shorts/save', 'Admin::saveShort');
+    $routes->get('shorts/delete/(:num)', 'Admin::deleteShort/$1');
 
 
     // Information Management

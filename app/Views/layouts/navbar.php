@@ -13,16 +13,15 @@ $isHome = url_is('/');
         <nav>
             <ul class="nav-menu" id="nav-menu">
                 <li>
-                    <a href="<?= $isHome ? '#dashboard' : base_url('#dashboard') ?>"
-                        class="nav-link <?= url_is('/') ? 'active' : '' ?>" data-section="dashboard">Dashboard</a>
-                </li>
-                <li>
                     <a href="<?= $isHome ? '#destinations' : base_url('#destinations') ?>" class="nav-link"
                         data-section="destinations">Destinations</a>
                 </li>
                 <li>
                     <a href="<?= $isHome ? '#gallery' : base_url('#gallery') ?>" class="nav-link"
                         data-section="gallery">Gallery</a>
+                </li>
+                <li>
+                    <a href="<?= $isHome ? '#shorts' : base_url('#shorts') ?>" class="nav-link <?= url_is('shorts') ? 'active' : '' ?>" data-section="shorts">Shorts</a>
                 </li>
                 <li>
                     <a href="<?= $isHome ? '#informasi' : base_url('#informasi') ?>" class="nav-link" data-section="informasi">Informasi</a>

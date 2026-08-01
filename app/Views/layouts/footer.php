@@ -23,6 +23,7 @@ $isHome = url_is('/');
                     <li><a href="<?= $isHome ? '#destinations' : base_url('#destinations') ?>">Destinations</a></li>
                     <li><a href="<?= $isHome ? '#gallery' : base_url('#gallery') ?>">Gallery</a></li>
                     <li><a href="<?= $isHome ? '#informasi' : base_url('#informasi') ?>">Informasi</a></li>
+                    <li><a href="<?= base_url('shorts') ?>">Shorts</a></li>
                     <li><a href="<?= $isHome ? '#map' : base_url('#map') ?>">Map</a></li>
                     <li><a href="<?= $isHome ? '#contact' : base_url('#contact') ?>">Contact</a></li>
                 </ul>
