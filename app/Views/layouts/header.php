@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?= esc($meta_description ?? 'Explore Bangka\'s best beaches: Pantai Matras, Pantai Jambosag, Pantai Turun Aban. Find destinations, maps, accommodations, and gallery journals.') ?>">
-    <meta name="keywords" content="Bangka Beach, Wisata Bangka, Pantai Matras, Pantai Jambosag, Pantai Turun Aban, Bangka Tourism">
-    <title><?= esc($title ?? 'Explore Bangka Beaches - Tourism Information System') ?></title>
+    <meta name="description" content="<?= esc($meta_description ?? 'Jelajahi keindahan Pantai Matras, Pantai Jambosag, dan Pantai Turun Aban di Desa Wisata Matras. Temukan pesona pantai pasir putih, air laut jernih, budaya lokal, serta rute perjalanan lengkap.') ?>">
+    <meta name="keywords" content="Bangka Beach, Wisata Bangka, Pantai Matras, Pantai Jambosag, Pantai Turun Aban, Bangka Tourism, Desa Wisata Matras">
+    <title><?= esc($title ?? 'Desa Wisata Matras - Sistem Informasi Pariwisata') ?></title>
     
     <!-- Base URL for Assets -->
     <link rel="icon" type="image/png" href="<?= base_url('uploads/favicon/MatrasExplore.png') ?>">

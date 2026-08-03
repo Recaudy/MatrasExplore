@@ -9,7 +9,7 @@ class Shorts extends BaseController
         $shortModel = new \App\Models\ShortModel();
         
         $data = [
-            'title' => 'Video Shorts - Explore Bangka Beaches',
+            'title' => 'Video Shorts - Desa Wisata Matras',
             'meta_description' => 'Tonton berbagai video pendek menarik seputar wisata Pantai Matras, Jambosag, dan Turun Aban.',
             'shorts' => $shortModel->orderBy('id', 'DESC')->findAll(),
             'pageStyles' => ['shorts.css']

@@ -13,7 +13,7 @@ class Information extends BaseController
         $information = $infoModel->orderBy('id', 'DESC')->findAll();
 
         $data = [
-            'title' => 'Pusat Informasi - Explore Bangka Beaches',
+            'title' => 'Pusat Informasi - Desa Wisata Matras',
             'meta_description' => 'Informasi penting seputar harga sewa, fasilitas, dan panduan wisata lainnya di pantai Bangka.',
             'information' => $information,
             'pageStyles' => ['gallery.css'], // We reuse gallery css for layout

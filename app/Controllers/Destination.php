@@ -39,7 +39,7 @@ class Destination extends BaseController
         $userPhotos = $userGalleryModel->getPhotosByDestination($destination['id']);
 
         $data = [
-            'title' => $destination['name'] . ' - Explore Bangka Beaches',
+            'title' => $destination['name'] . ' - Desa Wisata Matras',
             'meta_description' => esc($destination['description']),
             'destination' => $destination,
             'images' => $images,

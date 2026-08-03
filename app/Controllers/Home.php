@@ -78,8 +78,8 @@ class Home extends BaseController
         $settings = $settingModel->getAllSettingsAsMap();
 
         $data = [
-            'title' => 'Explore Bangka Beaches - Tourism Information System',
-            'meta_description' => 'Discover the beauty of Bangka\'s best beaches. Explore white sand beaches, crystal-clear waters, local culture, and travel routes all in one place.',
+            'title' => 'Desa Wisata Matras - Sistem Informasi Pariwisata',
+            'meta_description' => 'Jelajahi keindahan Pantai Matras, Pantai Jambosag, dan Pantai Turun Aban di Desa Wisata Matras. Temukan pesona pantai pasir putih, air laut jernih, budaya lokal, serta rute perjalanan lengkap.',
             'destinations' => $destinations,
             'gallery' => $gallery,
             'information' => $information,

@@ -42,7 +42,7 @@ class Gallery extends BaseController
         $destinations = $destModel->where('status', 'active')->findAll();
 
         $data = [
-            'title' => 'Galeri & Jurnal Visual - Explore Bangka Beaches',
+            'title' => 'Galeri & Jurnal Visual - Desa Wisata Matras',
             'meta_description' => 'Kumpulan potret keindahan pesisir pantai Bangka, laut jernih, pasir putih, serta foto kontribusi dari para pengunjung setia.',
             'gallery' => $allGallery,
             'destinations' => $destinations,
@@ -73,7 +73,7 @@ class Gallery extends BaseController
         }
 
         $data = [
-            'title' => $item['title'] . ' - Explore Bangka Beaches',
+            'title' => $item['title'] . ' - Desa Wisata Matras',
             'meta_description' => esc($item['description']),
             'item' => $item,
             'pageStyles' => ['gallery.css']
