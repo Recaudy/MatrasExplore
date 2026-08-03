@@ -6,7 +6,7 @@ $isHome = url_is('/');
     <div class="container nav-container">
         <!-- Logo -->
         <a href="<?= $isHome ? '#dashboard' : base_url('#dashboard') ?>" class="logo">
-            <div>Explore<span class="highlight">Matras</span></div>
+            <div>DesaWisata<span class="highlight">Matras</span></div>
         </a>
 
         <!-- Desktop Navigation Menu -->

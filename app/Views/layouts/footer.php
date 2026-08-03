@@ -43,7 +43,7 @@ $isHome = url_is('/');
         <!-- Bottom Copyright Bar -->
         <div class="footer-bottom">
             <div class="footer-copyright">
-                &copy; <?= date('Y') ?> Explore Matras. Semua Hak Dilindungi.
+                &copy; <?= date('Y') ?> Desa Wisata Matras. Semua Hak Dilindungi.
             </div>
             <div class="footer-tagline">
                 Jelajahi keindahan alam & Jaga kelestarian pantai

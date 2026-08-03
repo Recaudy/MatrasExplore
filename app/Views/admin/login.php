@@ -3,340 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin Panel - Wisata Matras</title>
+    <title>Admin Login - Wisata Matras</title>
     <link rel="icon" type="image/png" href="<?= base_url('uploads/favicon/MatrasExplore.png') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+            --primary: #065f46; /* Dark teal matching the screenshot */
+            --primary-hover: #047857;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
         }
         
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #e6f3f0; /* Light greenish-cyan background */
+            background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-sans);
-            background-color: #0f172a;
-            background-image: 
-                radial-gradient(at 40% 20%, hsla(180,100%,25%,0.3) 0px, transparent 50%),
-                radial-gradient(at 80% 0%, hsla(189,100%,35%,0.3) 0px, transparent 50%),
-                radial-gradient(at 0% 50%, hsla(210,100%,20%,0.3) 0px, transparent 50%),
-                radial-gradient(at 80% 50%, hsla(180,100%,20%,0.3) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(180,100%,15%,0.3) 0px, transparent 50%),
-                radial-gradient(at 80% 100%, hsla(210,100%,15%,0.3) 0px, transparent 50%),
-                radial-gradient(at 0% 0%, hsla(180,100%,10%,0.3) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: #f8fafc;
             padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* Animated background elements */
-        .bg-shape {
-            position: absolute;
-            filter: blur(80px);
-            z-index: -1;
-            border-radius: 50%;
-            animation: float 15s infinite ease-in-out alternate;
-        }
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(10, 168, 167, 0.2);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-        .shape-2 {
-            width: 500px;
-            height: 500px;
-            background: rgba(15, 23, 42, 0.8);
-            bottom: -200px;
-            right: -100px;
-            animation-delay: -5s;
-        }
-        .shape-3 {
-            width: 300px;
-            height: 300px;
-            background: rgba(13, 148, 136, 0.2);
-            top: 40%;
-            left: 50%;
-            animation-delay: -10s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(50px, 30px) scale(1.1); }
-            100% { transform: translate(-30px, 50px) scale(0.9); }
-        }
-
-        .login-container {
+        .login-card {
+            background-color: #ffffff;
             width: 100%;
-            max-width: 460px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            max-width: 420px;
+            border-radius: 20px;
             padding: 3rem 2.5rem;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
         }
 
-        /* Subtle glowing edge */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(10, 168, 167, 0.5), transparent);
-            opacity: 0.8;
-        }
-
-        .logo-box {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--color-primary), #0d9488);
-            border-radius: 18px;
+        .logo-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: white;
-            box-shadow: 0 10px 25px -5px rgba(10, 168, 167, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+            margin-bottom: 1.25rem;
         }
 
-        .logo-box svg {
-            width: 32px;
-            height: 32px;
-            stroke-width: 2;
+        .logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .title {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin: 0 0 8px;
             text-align: center;
-            letter-spacing: -0.02em;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
         }
 
         .subtitle {
-            color: #94a3b8;
-            font-size: 1rem;
-            margin: 0 0 2.5rem;
             text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
             font-weight: 500;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
-            position: relative;
+            margin-bottom: 1.25rem;
         }
 
         .form-label {
             display: block;
             font-size: 0.85rem;
-            font-weight: 600;
-            color: #cbd5e1;
-            margin-bottom: 8px;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
         }
 
-        .form-control {
-            width: 100%;
-            padding: 14px 16px 14px 44px;
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 1rem;
-            color: #ffffff;
-            outline: none;
-            transition: all 0.3s ease;
-            font-family: var(--font-sans);
-        }
-        
-        .form-control::placeholder {
-            color: #64748b;
-        }
-
-        .form-control:focus {
-            background: rgba(15, 23, 42, 0.8);
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 4px rgba(10, 168, 167, 0.15);
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .input-icon {
             position: absolute;
             left: 14px;
-            top: 39px;
-            color: #64748b;
-            transition: color 0.3s ease;
+            color: #94a3b8;
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+            transition: color 0.2s;
         }
 
-        .form-control:focus + .input-icon,
-        .form-control:not(:placeholder-shown) + .input-icon {
-            color: var(--color-primary);
+        .form-control {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-family: inherit;
+            transition: border-color 0.2s;
         }
+
+        .form-control::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-control:focus + .input-icon {
+            color: var(--primary);
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 14px;
+            color: #94a3b8;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            transition: color 0.2s;
+        }
+        
+        .eye-icon:hover {
+            color: var(--text-dark);
+        }
+
 
         .btn-login {
             width: 100%;
-            padding: 16px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--color-primary), #0d9488);
+            padding: 14px;
+            background-color: var(--primary);
             color: white;
             border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: inherit;
             cursor: pointer;
-            box-shadow: 0 10px 25px -5px rgba(10, 168, 167, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            font-family: var(--font-sans);
-            position: relative;
-            overflow: hidden;
+            transition: background-color 0.2s;
             margin-top: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px -5px rgba(10, 168, 167, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
-        }
-        
-        .btn-login:active {
-            transform: translateY(1px);
-        }
-
-        .alert {
-            padding: 1rem 1.25rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideIn 0.4s ease-out forwards;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .alert-error {
-            background-color: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-        }
-
-        .alert-success {
-            background-color: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #6ee7b7;
+            background-color: var(--primary-hover);
         }
 
         .back-link {
-            margin-top: 2.5rem;
             text-align: center;
         }
 
         .back-link a {
-            color: #94a3b8;
-            font-weight: 600;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
         }
 
         .back-link a:hover {
-            color: #ffffff;
+            opacity: 0.8;
         }
-        
-        .back-link a svg {
-            transition: transform 0.3s ease;
+
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
         }
-        
-        .back-link a:hover svg {
-            transform: translateX(-4px);
+
+        .alert-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+
+        .alert-success {
+            background-color: #d1fae5;
+            color: #047857;
+            border: 1px solid #6ee7b7;
         }
     </style>
 </head>
 <body>
-    <div class="bg-shape shape-1"></div>
-    <div class="bg-shape shape-2"></div>
-    <div class="bg-shape shape-3"></div>
+    <div class="login-card">
+        <div class="logo-container">
+            <img src="<?= base_url('uploads/favicon/MatrasExplore.png') ?>" alt="Logo Wisata Matras" class="logo">
+        </div>
+        
+        <h2 class="title">Admin Login</h2>
+        <p class="subtitle">Portal Pengelola Wisata Matras</p>
 
-    <div class="login-container">
-        <div class="glass-card">
-            <div class="logo-box">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                    <path d="M2 17l10 5 10-5"></path>
-                    <path d="M2 12l10 5 10-5"></path>
-                </svg>
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-error">
+                <?= session()->getFlashdata('error') ?>
             </div>
-            <h2 class="title">Admin Portal</h2>
-            <p class="subtitle">Wisata Matras Bangka Island</p>
+        <?php endif; ?>
 
-            <?php if (session()->getFlashdata('error')): ?>
-                <div class="alert alert-error">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
-                    <?= session()->getFlashdata('error') ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if (session()->getFlashdata('success')): ?>
-                <div class="alert alert-success">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    <?= session()->getFlashdata('success') ?>
-                </div>
-            <?php endif; ?>
-
-            <form action="<?= base_url('auth/attempt-login') ?>" method="POST">
-                <div class="form-group">
-                    <label class="form-label">Alamat Email</label>
-                    <input type="email" name="email" class="form-control" required placeholder="admin@wisatamatras.com">
-                    <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Kata Sandi</label>
-                    <input type="password" name="password" class="form-control" required placeholder="••••••••">
-                    <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                </div>
-
-                <button type="submit" class="btn-login">
-                    Masuk ke Dashboard
-                </button>
-            </form>
-
-            <div class="back-link">
-                <a href="<?= base_url() ?>">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                    Kembali ke Beranda
-                </a>
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert alert-success">
+                <?= session()->getFlashdata('success') ?>
             </div>
+        <?php endif; ?>
+
+        <form action="<?= base_url('auth/attempt-login') ?>" method="POST">
+            <div class="form-group">
+                <label class="form-label">Alamat Email</label>
+                <div class="input-group">
+                    <input type="email" name="email" class="form-control" required placeholder="admin@pantai.com" value="<?= old('email') ?>">
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" name="password" id="password" class="form-control" required placeholder="Masukkan password">
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    
+                    <svg class="eye-icon" id="togglePassword" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn-login">
+                Masuk
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="<?= base_url() ?>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Kembali ke Beranda
+            </a>
         </div>
     </div>
+
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            if(type === 'password') {
+                this.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+            } else {
+                this.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+            }
+        });
+    </script>
 </body>
 </html>
