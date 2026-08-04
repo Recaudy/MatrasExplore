@@ -426,7 +426,7 @@
                         <p style="margin: 0; font-weight: 700; color: var(--color-primary-dark); font-size: 0.95rem;">
                             Klik atau Geser File Gambar ke Sini</p>
                         <span style="font-size: 0.78rem; color: var(--color-dark-muted);">Format: JPG, PNG, atau WEBP
-                            (Maksimal 10MB)</span>
+                            (Maksimal 2MB)</span>
                     </div>
                     <div id="homeImagePreviewBox" style="display: none; margin-top: 10px;">
                         <img id="homePreviewImageElem" src="" alt="Preview"

@@ -98,11 +98,11 @@ class Destination extends BaseController
                 ]
             ],
             'image'       => [
-                'rules' => 'uploaded[image]|is_image[image]|max_size[image,10240]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]',
+                'rules' => 'uploaded[image]|is_image[image]|max_size[image,2048]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]',
                 'errors' => [
                     'uploaded' => 'File gambar wajib diupload.',
                     'is_image' => 'File harus berupa gambar.',
-                    'max_size' => 'Ukuran gambar maksimal 10MB.',
+                    'max_size' => 'Ukuran gambar maksimal 2MB.',
                     'mime_in' => 'Format gambar harus JPG, JPEG, PNG, atau WEBP.'
                 ]
             ]
@@ -113,7 +113,7 @@ class Destination extends BaseController
             if ($this->request->isAJAX()) {
                 return $this->response->setJSON(['status' => 'error', 'errors' => $this->validator->getErrors()]);
             }
-            return redirect()->back()->withInput()->with('gallery_error', 'Gagal mengupload! Pastikan semua kolom terisi, format gambar benar (JPG/PNG), dan ukuran maksimal 10MB.');
+            return redirect()->back()->withInput()->with('gallery_error', 'Gagal mengupload! Pastikan semua kolom terisi, format gambar benar (JPG/PNG/WEBP), dan ukuran maksimal 2MB.');
         }
 
         $imageFile = $this->request->getFile('image');
@@ -126,6 +126,17 @@ class Destination extends BaseController
             }
             $newName = $imageFile->getRandomName();
             $imageFile->move($uploadDir, $newName);
+            
+            // Compress image to reduce size
+            try {
+                $fullPath = $uploadDir . '/' . $newName;
+                \Config\Services::image()
+                    ->withFile($fullPath)
+                    ->save($fullPath, 60); // Save with 60% quality to compress to hundreds of KB
+            } catch (\CodeIgniter\Images\Exceptions\ImageException $e) {
+                // Ignore compression errors if image format is unsupported or GD is missing
+            }
+            
             $imagePath = 'uploads/destination_gallery/' . $newName;
         } else {
             if ($this->request->isAJAX()) {

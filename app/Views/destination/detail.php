@@ -404,7 +404,7 @@
                     <div id="dropzoneText">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                         <p style="margin: 0; font-weight: 700; color: var(--color-primary-dark); font-size: 0.95rem;">Klik atau Geser File Gambar ke Sini</p>
-                        <span style="font-size: 0.78rem; color: var(--color-dark-muted);">Format: JPG, PNG, atau WEBP (Maksimal 5MB)</span>
+                        <span style="font-size: 0.78rem; color: var(--color-dark-muted);">Format: JPG, PNG, atau WEBP (Maksimal 2MB)</span>
                     </div>
                     <div id="imagePreviewBox" style="display: none; margin-top: 10px;">
                         <img id="previewImageElem" src="" alt="Preview" style="max-height: 160px; border-radius: 8px; box-shadow: var(--shadow-sm); margin: 0 auto; display: block;">

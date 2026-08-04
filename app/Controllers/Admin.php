@@ -409,7 +409,6 @@ class Admin extends BaseController
         ]);
     }
 
-    // Bulk delete selected gallery items
     public function bulkDeleteGallery()
     {
         if (!$this->checkAuth()) return redirect()->to(base_url('auth/login'));
@@ -418,13 +417,31 @@ class Admin extends BaseController
         if (!empty($ids) && is_array($ids)) {
             foreach ($ids as $mixed_id) {
                 if (strpos($mixed_id, 'official_') === 0) {
-                    (new GalleryModel())->delete(str_replace('official_', '', $mixed_id));
+                    $id = str_replace('official_', '', $mixed_id);
+                    $model = new GalleryModel();
+                    $item = $model->find($id);
+                    if ($item && !empty($item['image'])) {
+                        $filePath = FCPATH . $item['image'];
+                        if (strpos($item['image'], 'uploads/') !== false && file_exists($filePath)) {
+                            unlink($filePath);
+                        }
+                    }
+                    $model->delete($id);
                 } elseif (strpos($mixed_id, 'user_') === 0) {
-                    (new DestinationUserGalleryModel())->delete(str_replace('user_', '', $mixed_id));
+                    $id = str_replace('user_', '', $mixed_id);
+                    $model = new DestinationUserGalleryModel();
+                    $item = $model->find($id);
+                    if ($item && !empty($item['image_path'])) {
+                        $filePath = FCPATH . $item['image_path'];
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
+                    }
+                    $model->delete($id);
                 }
             }
         }
-        return redirect()->to(base_url('admin/gallery'))->with('success', 'Item(s) galeri berhasil dihapus.');
+        return redirect()->to(base_url('admin/gallery'))->with('success', 'Item(s) galeri berhasil dihapus beserta filenya.');
     }
 
     // Bulk update dashboard display for selected gallery items
@@ -464,7 +481,19 @@ class Admin extends BaseController
 
         if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
             $newName = $imageFile->getRandomName();
-            $imageFile->move(FCPATH . 'uploads/gallery', $newName);
+            $uploadDir = FCPATH . 'uploads/gallery';
+            $imageFile->move($uploadDir, $newName);
+            
+            // Compress image to reduce size
+            try {
+                $fullPath = $uploadDir . '/' . $newName;
+                \Config\Services::image()
+                    ->withFile($fullPath)
+                    ->save($fullPath, 60);
+            } catch (\CodeIgniter\Images\Exceptions\ImageException $e) {
+                // Ignore compression errors
+            }
+            
             $imagePath = 'uploads/gallery/' . $newName;
         }
 
@@ -484,12 +513,30 @@ class Admin extends BaseController
         if (!$this->checkAuth()) return redirect()->to(base_url('auth/login'));
 
         if (strpos($mixed_id, 'official_') === 0) {
-            (new GalleryModel())->delete(str_replace('official_', '', $mixed_id));
+            $id = str_replace('official_', '', $mixed_id);
+            $model = new GalleryModel();
+            $item = $model->find($id);
+            if ($item && !empty($item['image'])) {
+                $filePath = FCPATH . $item['image'];
+                if (strpos($item['image'], 'uploads/') !== false && file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+            $model->delete($id);
         } elseif (strpos($mixed_id, 'user_') === 0) {
-            (new DestinationUserGalleryModel())->delete(str_replace('user_', '', $mixed_id));
+            $id = str_replace('user_', '', $mixed_id);
+            $model = new DestinationUserGalleryModel();
+            $item = $model->find($id);
+            if ($item && !empty($item['image_path'])) {
+                $filePath = FCPATH . $item['image_path'];
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+            $model->delete($id);
         }
 
-        return redirect()->to(base_url('admin/gallery'))->with('success', 'Item galeri berhasil dihapus!');
+        return redirect()->to(base_url('admin/gallery'))->with('success', 'Item galeri beserta file gambarnya berhasil dihapus!');
     }
 
     // ------------------------------------------------------------------------
@@ -678,9 +725,18 @@ class Admin extends BaseController
         if (!$this->checkAuth()) return redirect()->to(base_url('auth/login'));
 
         $userPhotoModel = new DestinationUserGalleryModel();
+        
+        $photo = $userPhotoModel->find($id);
+        if ($photo && !empty($photo['image_path'])) {
+            $filePath = FCPATH . $photo['image_path'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        
         $userPhotoModel->delete($id);
 
-        return redirect()->back()->with('success', 'Foto wisatawan berhasil dihapus dari database.');
+        return redirect()->back()->with('success', 'Foto wisatawan dan filenya berhasil dihapus dari sistem.');
     }
 
     // ------------------------------------------------------------------------
