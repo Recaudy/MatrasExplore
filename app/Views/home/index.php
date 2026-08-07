@@ -240,7 +240,10 @@
             <div class="short-card" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); display: flex; flex-direction: column; transition: transform 0.3s ease; position: relative;">
                 <div class="video-container" style="position: relative; width: 100%; padding-bottom: 177.77%; background: #000; cursor: pointer;" onclick="openVideoModal('<?= esc($short['title'], 'js') ?>', '<?= esc($youtube_id, 'js') ?>', '<?= esc($short['description'] ?? '', 'js') ?>')">
                     <?php if($youtube_id): ?>
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; pointer-events: none;" src="https://www.youtube.com/embed/<?= $youtube_id ?>?modestbranding=1&rel=0&iv_load_policy=3&controls=0&playsinline=1" title="<?= esc($short['title']) ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s;" src="https://i.ytimg.com/vi/<?= $youtube_id ?>/maxresdefault.jpg" alt="<?= esc($short['title']) ?>" onerror="this.src='https://i.ytimg.com/vi/<?= $youtube_id ?>/hqdefault.jpg';">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 5; border: 2px solid rgba(255,255,255,0.8);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 3px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
                     <?php else: ?>
                         <div class="invalid-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #ef4444; font-weight: 500;">URL Video Tidak Valid</div>
                     <?php endif; ?>
@@ -687,6 +690,13 @@ function openVideoModal(title, youtubeId, description) {
         modalDesc.style.maxHeight = 'none';
         modalDesc.style.overflowY = 'hidden';
         modalDesc.style.paddingRight = '0';
+        
+        // Add Open in YouTube link
+        const btnOpenYoutube = document.getElementById('btnOpenYoutube');
+        if(btnOpenYoutube) {
+            btnOpenYoutube.href = 'https://www.youtube.com/shorts/' + youtubeId;
+        }
+
         if(btnReadMore) {
             btnReadMore.textContent = 'Lihat lebih banyak';
             btnReadMore.style.display = 'none';
@@ -700,7 +710,9 @@ function openVideoModal(title, youtubeId, description) {
     }
     
     if(modalIframe) {
-        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0';
+        // Add origin to help with some domain restrictions
+        const origin = window.location.origin;
+        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&origin=' + encodeURIComponent(origin);
     }
     
     if(modal) {
@@ -783,7 +795,16 @@ function toggleDesc() {
                 
                 <div id="descWrapper">
                     <p id="modalVideoDesc" style="font-size: 1.05rem; font-weight: normal; color: #ffffff; margin: 0; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); transition: all 0.3s ease; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; /* Hide scrollbar for cleaner look */ scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;"></p>
-                    <button id="btnReadMore" type="button" onclick="toggleDesc()" style="background: none; border: none; color: #fff; font-size: 1rem; font-weight: 800; padding: 0; margin-top: 8px; cursor: pointer; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); display: none;">Lihat lebih banyak</button>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px; flex-wrap: wrap;">
+                        <button id="btnReadMore" type="button" onclick="toggleDesc()" style="background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 800; padding: 0; cursor: pointer; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); display: none;">Lihat lebih banyak</button>
+                        <a id="btnOpenYoutube" href="#" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"/>
+                            </svg>
+                            Buka di YouTube
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
