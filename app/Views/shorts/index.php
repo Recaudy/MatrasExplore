@@ -49,12 +49,14 @@
     </section>
 </main>
 
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
+let ytPlayer = null;
+
 function openVideoModal(title, youtubeId, description) {
     const modalTitle = document.getElementById('modalVideoTitle');
     const modalDesc = document.getElementById('modalVideoDesc');
     const btnReadMore = document.getElementById('btnReadMore');
-    const modalIframe = document.getElementById('modalVideoIframe');
     const modal = document.getElementById('videoModalPopup');
 
     if(modalTitle) modalTitle.textContent = title;
@@ -85,23 +87,41 @@ function openVideoModal(title, youtubeId, description) {
         }
     }
     
-    if(modalIframe) {
-        // Use standard youtube.com but explicitly append origin to prevent Error 153
-        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&origin=' + encodeURIComponent(window.location.origin);
+    // Initialize or Update YouTube Player API
+    if (ytPlayer) {
+        ytPlayer.loadVideoById(youtubeId);
+    } else {
+        ytPlayer = new YT.Player('ytPlayerContainer', {
+            videoId: youtubeId,
+            playerVars: {
+                'autoplay': 1,
+                'modestbranding': 1,
+                'rel': 0,
+                'origin': window.location.origin
+            },
+            events: {
+                'onError': function(event) {
+                    console.error("YouTube Player Error", event.data);
+                    if(event.data === 101 || event.data === 150 || event.data === 153) {
+                        // Fallback UI if owner disabled embed
+                        const container = document.getElementById('ytPlayerWrapper');
+                        container.innerHTML = '<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:15px; opacity:0.8;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><h4 style="color:white;margin-bottom:10px;font-family:Outfit,sans-serif;">Video Tidak Dapat Diputar</h4><p style="color:#aaa;font-size:0.9rem;margin-bottom:20px;">Pemilik video menonaktifkan fitur putar eksternal (Embed) untuk video ini, atau terjadi pembatasan domain.</p><a href="https://www.youtube.com/shorts/'+youtubeId+'" target="_blank" style="background:white;color:black;padding:8px 20px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:0.9rem;">Tonton Langsung di YouTube</a></div>';
+                        ytPlayer = null; // reset player so it can be recreated next time
+                    }
+                }
+            }
+        });
     }
     
     if(modal) {
         modal.style.display = 'flex';
         
-        // Wait for rendering to calculate scrollHeight accurately
         setTimeout(() => {
             modal.style.opacity = '1';
             const box = modal.querySelector('.video-modal-box');
             if(box) box.style.transform = 'scale(1)';
             
-            // Now check if text overflows
             if (modalDesc && description && description.trim() !== '') {
-                // Check if scrollHeight is significantly larger than clientHeight (to avoid subpixel issues)
                 if (modalDesc.scrollHeight > (modalDesc.clientHeight + 2) || description.length > 90) {
                     if (btnReadMore) btnReadMore.style.display = 'inline-block';
                 }
@@ -112,7 +132,6 @@ function openVideoModal(title, youtubeId, description) {
 
 function closeVideoModal() {
     const modal = document.getElementById('videoModalPopup');
-    const modalIframe = document.getElementById('modalVideoIframe');
     
     if(modal) {
         modal.style.opacity = '0';
@@ -121,8 +140,10 @@ function closeVideoModal() {
         
         setTimeout(() => {
             modal.style.display = 'none';
-            if(modalIframe) modalIframe.src = '';
-        }, 300); // match transition duration
+            if (ytPlayer && typeof ytPlayer.stopVideo === 'function') {
+                ytPlayer.stopVideo();
+            }
+        }, 300);
     }
 }
 
@@ -133,7 +154,7 @@ function toggleDesc() {
     if (modalDesc.style.display === '-webkit-box' || modalDesc.style.webkitLineClamp === '2') {
         modalDesc.style.display = 'block';
         modalDesc.style.webkitLineClamp = 'unset';
-        modalDesc.style.maxHeight = '65vh'; // Expand upwards significantly
+        modalDesc.style.maxHeight = '65vh'; 
         modalDesc.style.overflowY = 'auto';
         modalDesc.style.paddingRight = '10px';
         
@@ -159,8 +180,8 @@ function toggleDesc() {
         <!-- Close Button Top Right (Inside Modal Box) -->
         <button type="button" onclick="closeVideoModal()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.2); font-size: 1.8rem; cursor: pointer; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10010; transition: all 0.2s; backdrop-filter: blur(4px);" onmouseover="this.style.background='rgba(0,0,0,0.9)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(0,0,0,0.7)'; this.style.transform='scale(1)';">&times;</button>
 
-        <div class="video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;">
-            <iframe id="modalVideoIframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div id="ytPlayerWrapper" class="video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;">
+            <div id="ytPlayerContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
         </div>
         
         <!-- Description Overlay -->
