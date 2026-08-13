@@ -243,6 +243,42 @@ h1, h2, h3, h4, h5, h6 {
 .stat-icon.amber { background-color: #fffbeb; color: #d97706; }
 .stat-icon.rose { background-color: #fff1f2; color: #e11d48; }
 
+/* Dashboard Card Gradients */
+.admin-stat-card.bg-gradient-blue {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-color: #bae6fd;
+}
+.admin-stat-card.bg-gradient-blue h3 { color: #0369a1; }
+.admin-stat-card.bg-gradient-blue .stat-icon { background-color: #0284c7; color: white; }
+
+.admin-stat-card.bg-gradient-amber {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border-color: #fde68a;
+}
+.admin-stat-card.bg-gradient-amber h3 { color: #b45309; }
+.admin-stat-card.bg-gradient-amber .stat-icon { background-color: #d97706; color: white; }
+
+.admin-stat-card.bg-gradient-teal {
+    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+    border-color: #99f6e4;
+}
+.admin-stat-card.bg-gradient-teal h3 { color: #0f766e; }
+.admin-stat-card.bg-gradient-teal .stat-icon { background-color: #0d9488; color: white; }
+
+.admin-stat-card.bg-gradient-rose {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+    border-color: #fecdd3;
+}
+.admin-stat-card.bg-gradient-rose h3 { color: #be123c; }
+.admin-stat-card.bg-gradient-rose .stat-icon { background-color: #e11d48; color: white; }
+
+.admin-stat-card.bg-gradient-indigo {
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+    border-color: #c7d2fe;
+}
+.admin-stat-card.bg-gradient-indigo h3 { color: #4338ca; }
+.admin-stat-card.bg-gradient-indigo .stat-icon { background-color: #6366f1; color: white; }
+
 /* Table Styles */
 .admin-card {
     background-color: var(--admin-card-bg);
