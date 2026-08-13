@@ -4,52 +4,52 @@
 
 <!-- Overview Statistics Grid -->
 <div class="admin-stats-grid">
-    <div class="admin-stat-card">
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-color: #bae6fd;">
         <div class="stat-info">
             <span>Total Destinasi Pantai</span>
-            <h3><?= esc($stats['total_destinations']) ?></h3>
+            <h3 style="color: #0369a1;"><?= esc($stats['total_destinations']) ?></h3>
         </div>
-        <div class="stat-icon blue">
+        <div class="stat-icon" style="background-color: #0284c7; color: white;">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
         </div>
     </div>
 
-    <div class="admin-stat-card">
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-color: #fde68a;">
         <div class="stat-info">
             <span>Pending Review</span>
-            <h3><?= esc($stats['pending_reviews']) ?></h3>
+            <h3 style="color: #b45309;"><?= esc($stats['pending_reviews']) ?></h3>
         </div>
-        <div class="stat-icon amber">
+        <div class="stat-icon" style="background-color: #d97706; color: white;">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
         </div>
     </div>
 
-    <div class="admin-stat-card">
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border-color: #99f6e4;">
         <div class="stat-info">
             <span>Pending Foto Wisatawan</span>
-            <h3><?= esc($stats['pending_photos']) ?></h3>
+            <h3 style="color: #0f766e;"><?= esc($stats['pending_photos']) ?></h3>
         </div>
-        <div class="stat-icon teal">
+        <div class="stat-icon" style="background-color: #0d9488; color: white;">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
         </div>
     </div>
 
-    <div class="admin-stat-card">
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%); border-color: #fecdd3;">
         <div class="stat-info">
             <span>Pesan Kontak Masuk</span>
-            <h3><?= esc($stats['total_contacts']) ?></h3>
+            <h3 style="color: #be123c;"><?= esc($stats['total_contacts']) ?></h3>
         </div>
-        <div class="stat-icon rose">
+        <div class="stat-icon" style="background-color: #e11d48; color: white;">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         </div>
     </div>
 
-    <div class="admin-stat-card">
+    <div class="admin-stat-card" style="background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-color: #c7d2fe;">
         <div class="stat-info">
             <span>Total Pengunjung Web</span>
-            <h3><?= esc($stats['total_visitors']) ?></h3>
+            <h3 style="color: #4338ca;"><?= esc($stats['total_visitors']) ?></h3>
         </div>
-        <div class="stat-icon blue">
+        <div class="stat-icon" style="background-color: #6366f1; color: white;">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         </div>
     </div>
