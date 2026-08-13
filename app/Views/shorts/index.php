@@ -49,10 +49,7 @@
     </section>
 </main>
 
-<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-let ytPlayer = null;
-
 function openVideoModal(title, youtubeId, description) {
     const modalTitle = document.getElementById('modalVideoTitle');
     const modalDesc = document.getElementById('modalVideoDesc');
@@ -87,30 +84,10 @@ function openVideoModal(title, youtubeId, description) {
         }
     }
     
-    // Initialize or Update YouTube Player API
-    if (ytPlayer) {
-        ytPlayer.loadVideoById(youtubeId);
-    } else {
-        ytPlayer = new YT.Player('ytPlayerContainer', {
-            videoId: youtubeId,
-            playerVars: {
-                'autoplay': 1,
-                'modestbranding': 1,
-                'rel': 0,
-                'origin': window.location.origin
-            },
-            events: {
-                'onError': function(event) {
-                    console.error("YouTube Player Error", event.data);
-                    if(event.data === 101 || event.data === 150 || event.data === 153) {
-                        // Fallback UI if owner disabled embed
-                        const container = document.getElementById('ytPlayerWrapper');
-                        container.innerHTML = '<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:15px; opacity:0.8;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><h4 style="color:white;margin-bottom:10px;font-family:Outfit,sans-serif;">Video Tidak Dapat Diputar</h4><p style="color:#aaa;font-size:0.9rem;margin-bottom:20px;">Pemilik video menonaktifkan fitur putar eksternal (Embed) untuk video ini, atau terjadi pembatasan domain.</p><a href="https://www.youtube.com/shorts/'+youtubeId+'" target="_blank" style="background:white;color:black;padding:8px 20px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:0.9rem;">Tonton Langsung di YouTube</a></div>';
-                        ytPlayer = null; // reset player so it can be recreated next time
-                    }
-                }
-            }
-        });
+    // Inject raw iframe using youtube-nocookie to bypass AdBlocker tracking blocks
+    const container = document.getElementById('ytPlayerWrapper');
+    if (container) {
+        container.innerHTML = '<iframe id="modalVideoIframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube-nocookie.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     }
     
     if(modal) {
@@ -140,9 +117,9 @@ function closeVideoModal() {
         
         setTimeout(() => {
             modal.style.display = 'none';
-            if (ytPlayer && typeof ytPlayer.stopVideo === 'function') {
-                ytPlayer.stopVideo();
-            }
+            // Destroy iframe to stop playback
+            const container = document.getElementById('ytPlayerWrapper');
+            if (container) container.innerHTML = '';
         }, 300);
     }
 }
@@ -181,7 +158,7 @@ function toggleDesc() {
         <button type="button" onclick="closeVideoModal()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.2); font-size: 1.8rem; cursor: pointer; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10010; transition: all 0.2s; backdrop-filter: blur(4px);" onmouseover="this.style.background='rgba(0,0,0,0.9)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(0,0,0,0.7)'; this.style.transform='scale(1)';">&times;</button>
 
         <div id="ytPlayerWrapper" class="video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;">
-            <div id="ytPlayerContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+            <!-- Iframe injected via JS -->
         </div>
         
         <!-- Description Overlay -->
