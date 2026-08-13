@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- CSS Styles -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/admin.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=' . filemtime(FCPATH . 'assets/css/style.css')) ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/admin.css?v=' . filemtime(FCPATH . 'assets/css/admin.css')) ?>">
 </head>
 <body class="admin-body">
     <div class="admin-wrapper">
