@@ -71,20 +71,21 @@
         }
 
         .admin-sidebar-menu {
-            list-style: none; padding: 0.75rem 1rem; margin: 0;
-            flex: 1; display: flex; flex-direction: column; gap: 4px;
+            list-style: none !important; padding: 0.75rem 1rem !important; margin: 0 !important;
+            flex: 1; display: flex; flex-direction: column; gap: 4px !important;
         }
 
         .admin-sidebar-menu li {
-            margin: 0; padding: 0; list-style: none;
+            margin: 0 !important; padding: 0 !important; list-style: none !important;
+            line-height: normal !important;
         }
 
         .admin-sidebar-menu li a {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 18px; color: var(--color-dark-muted);
+            padding: 12px 18px !important; color: var(--color-dark-muted);
             text-decoration: none; border-radius: 12px;
             font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease;
-            margin: 0;
+            margin: 0 !important; line-height: 1.4 !important;
         }
 
         .admin-sidebar-menu li a .menu-left {
