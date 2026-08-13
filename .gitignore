@@ -60,6 +60,11 @@ Vagrantfile
 /writable/uploads/*
 !/writable/uploads/index.html
 
+# Mencegah foto/file upload di dalam folder public terhapus/tertimpa oleh GitHub
+/public/uploads/*
+!/public/uploads/index.html
+!/public/uploads/favicon/
+
 /writable/debugbar/*
 !/writable/debugbar/index.html
 
