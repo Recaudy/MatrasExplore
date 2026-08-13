@@ -50,7 +50,10 @@
 </main>
 
 <script>
+let currentYoutubeId = '';
+
 function openVideoModal(title, youtubeId, description) {
+    currentYoutubeId = youtubeId;
     const modalTitle = document.getElementById('modalVideoTitle');
     const modalDesc = document.getElementById('modalVideoDesc');
     const btnReadMore = document.getElementById('btnReadMore');
@@ -60,13 +63,11 @@ function openVideoModal(title, youtubeId, description) {
     
     if(modalDesc) {
         modalDesc.textContent = description || '';
-        // Reset state
         modalDesc.style.webkitLineClamp = '2';
         modalDesc.style.maxHeight = 'none';
         modalDesc.style.overflowY = 'hidden';
         modalDesc.style.paddingRight = '0';
         
-        // Add Open in YouTube link
         const btnOpenYoutube = document.getElementById('btnOpenYoutube');
         if(btnOpenYoutube) {
             btnOpenYoutube.href = 'https://www.youtube.com/shorts/' + youtubeId;
@@ -84,10 +85,28 @@ function openVideoModal(title, youtubeId, description) {
         }
     }
     
-    // Inject raw iframe using youtube-nocookie to bypass AdBlocker tracking blocks
-    const container = document.getElementById('ytPlayerWrapper');
-    if (container) {
-        container.innerHTML = '<iframe id="modalVideoIframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube-nocookie.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    // Show the modal with fallback thumbnail first
+    const wrapper = document.getElementById('ytPlayerWrapper');
+    const fallback = document.getElementById('ytFallback');
+    const iframeContainer = document.getElementById('ytIframeContainer');
+    
+    if (wrapper) {
+        // Show fallback thumbnail immediately as background
+        if (fallback) {
+            fallback.querySelector('img').src = 'https://i.ytimg.com/vi/' + youtubeId + '/maxresdefault.jpg';
+            fallback.querySelector('img').onerror = function() { this.src = 'https://i.ytimg.com/vi/' + youtubeId + '/hqdefault.jpg'; };
+            fallback.querySelector('a').href = 'https://www.youtube.com/shorts/' + youtubeId;
+            fallback.style.display = 'none'; // hide initially, show only if iframe fails
+        }
+        
+        // Try iframe embed
+        if (iframeContainer) {
+            iframeContainer.style.display = 'block';
+            iframeContainer.innerHTML = '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&playsinline=1" title="Video" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            
+            // Check after 4 seconds if video loaded — if iframe threw Error 153, YouTube shows error UI inside iframe
+            // We can't detect that from parent, so we provide a manual "not working?" link
+        }
     }
     
     if(modal) {
@@ -107,6 +126,19 @@ function openVideoModal(title, youtubeId, description) {
     }
 }
 
+function switchToFallback() {
+    const fallback = document.getElementById('ytFallback');
+    const iframeContainer = document.getElementById('ytIframeContainer');
+    
+    if (iframeContainer) {
+        iframeContainer.style.display = 'none';
+        iframeContainer.innerHTML = '';
+    }
+    if (fallback) {
+        fallback.style.display = 'flex';
+    }
+}
+
 function closeVideoModal() {
     const modal = document.getElementById('videoModalPopup');
     
@@ -117,9 +149,10 @@ function closeVideoModal() {
         
         setTimeout(() => {
             modal.style.display = 'none';
-            // Destroy iframe to stop playback
-            const container = document.getElementById('ytPlayerWrapper');
-            if (container) container.innerHTML = '';
+            const iframeContainer = document.getElementById('ytIframeContainer');
+            if (iframeContainer) iframeContainer.innerHTML = '';
+            const fallback = document.getElementById('ytFallback');
+            if (fallback) fallback.style.display = 'none';
         }, 300);
     }
 }
@@ -154,11 +187,31 @@ function toggleDesc() {
     
     <div class="video-modal-box" style="background: #000; width: 100%; max-width: 450px; height: 100%; max-height: 100vh; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
         
-        <!-- Close Button Top Right (Inside Modal Box) -->
+        <!-- Close Button -->
         <button type="button" onclick="closeVideoModal()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.2); font-size: 1.8rem; cursor: pointer; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10010; transition: all 0.2s; backdrop-filter: blur(4px);" onmouseover="this.style.background='rgba(0,0,0,0.9)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(0,0,0,0.7)'; this.style.transform='scale(1)';">&times;</button>
 
         <div id="ytPlayerWrapper" class="video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;">
-            <!-- Iframe injected via JS -->
+            <!-- Iframe container (shown first) -->
+            <div id="ytIframeContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+            
+            <!-- Fallback UI (shown when iframe fails) -->
+            <div id="ytFallback" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
+                <img src="" alt="Thumbnail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: blur(2px);">
+                <div style="position: relative; z-index: 2;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.9;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <h4 style="color: white; margin-bottom: 10px; font-family: 'Outfit', sans-serif; font-size: 1.15rem;">Video Tidak Dapat Diputar di Sini</h4>
+                    <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; max-width: 280px;">Pemilik video membatasi pemutaran di website eksternal. Klik tombol di bawah untuk menonton di YouTube.</p>
+                    <a href="#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #ff0000; color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: all 0.2s; box-shadow: 0 4px 15px rgba(255,0,0,0.4);" onmouseover="this.style.background='#cc0000'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='#ff0000'; this.style.transform='scale(1)';">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"/></svg>
+                        Tonton di YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- "Video tidak muncul?" link -->
+        <div style="position: absolute; top: 1rem; left: 1rem; z-index: 10010;">
+            <button type="button" onclick="switchToFallback()" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); font-size: 0.75rem; padding: 5px 10px; border-radius: 15px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(0,0,0,0.8)';" onmouseout="this.style.color='rgba(255,255,255,0.7)'; this.style.background='rgba(0,0,0,0.6)';">Video tidak muncul?</button>
         </div>
         
         <!-- Description Overlay -->
@@ -167,7 +220,7 @@ function toggleDesc() {
                 <h3 id="modalVideoTitle" style="font-size: 1.05rem; font-weight: bold; color: #ffffff; margin: 0 0 0.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); letter-spacing: 0.5px;">Judul Video</h3>
                 
                 <div id="descWrapper">
-                    <p id="modalVideoDesc" style="font-size: 1.05rem; font-weight: normal; color: #ffffff; margin: 0; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); transition: all 0.3s ease; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; /* Hide scrollbar for cleaner look */ scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;"></p>
+                    <p id="modalVideoDesc" style="font-size: 1.05rem; font-weight: normal; color: #ffffff; margin: 0; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); transition: all 0.3s ease; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;"></p>
                     <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px; flex-wrap: wrap;">
                         <button id="btnReadMore" type="button" onclick="toggleDesc()" style="background: none; border: none; color: #fff; font-size: 0.95rem; font-weight: 800; padding: 0; cursor: pointer; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); display: none;">Lihat lebih banyak</button>
                         <a id="btnOpenYoutube" href="#" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
