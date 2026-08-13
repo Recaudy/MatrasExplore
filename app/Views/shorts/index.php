@@ -86,9 +86,8 @@ function openVideoModal(title, youtubeId, description) {
     }
     
     if(modalIframe) {
-        // Use youtube-nocookie to avoid AdBlocker blocking tracking scripts which sometimes causes player errors
-        // Append origin explicitly to avoid Error 153 on some hosting environments
-        modalIframe.src = 'https://www.youtube-nocookie.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&origin=' + encodeURIComponent(window.location.origin);
+        // Use standard youtube.com but explicitly append origin to prevent Error 153
+        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&origin=' + encodeURIComponent(window.location.origin);
     }
     
     if(modal) {
@@ -161,7 +160,7 @@ function toggleDesc() {
         <button type="button" onclick="closeVideoModal()" style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.2); font-size: 1.8rem; cursor: pointer; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10010; transition: all 0.2s; backdrop-filter: blur(4px);" onmouseover="this.style.background='rgba(0,0,0,0.9)'; this.style.transform='scale(1.1)';" onmouseout="this.style.background='rgba(0,0,0,0.7)'; this.style.transform='scale(1)';">&times;</button>
 
         <div class="video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;">
-            <iframe id="modalVideoIframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe id="modalVideoIframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         
         <!-- Description Overlay -->
