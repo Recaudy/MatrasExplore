@@ -40,7 +40,7 @@
 </section>
 
 <!-- 2. Destinations Section -->
-<section class="section-padding" id="destinations">
+<section class="section-padding" id="destinations" style="background-color: var(--color-white);">
     <div class="container">
         <div class="section-header reveal">
             <div class="section-header-left">
@@ -102,7 +102,7 @@
 </section>
 
 <!-- 3. Gallery Section -->
-<section class="section-padding gallery-section" style="background-color: var(--color-bg-cool);" id="gallery">
+<section class="section-padding gallery-section" style="background-color: #f8fafc;" id="gallery">
     <div class="container">
         <?php if (session()->getFlashdata('gallery_success')): ?>
         <div
@@ -219,7 +219,7 @@
 </section>
 
 <!-- 3.5. Shorts Section -->
-<section class="section-padding" id="shorts" style="background-color: #f8fafc;">
+<section class="section-padding" id="shorts" style="background-color: #f0fdfa;">
     <div class="container">
         <div class="section-header reveal">
             <div class="section-header-left">
@@ -263,8 +263,50 @@
     </div>
 </section>
 
+<!-- 3.75. Latest News Section -->
+<section class="section-padding" id="berita" style="background-color: var(--color-white);">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-header-left">
+                <h2>Berita & Artikel Terbaru</h2>
+                <p>Ikuti perkembangan terbaru dan cerita menarik dari kawasan Desa Wisata Matras</p>
+            </div>
+            <a href="<?= base_url('news') ?>" class="btn btn-outline-primary" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; padding: 12px 24px;">
+                Lihat Semua Berita
+            </a>
+        </div>
+
+        <?php if (!empty($latest_news)): ?>
+        <div class="news-grid reveal" style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
+            <?php foreach($latest_news as $item): ?>
+            <a href="<?= base_url('news/' . $item['slug']) ?>" style="text-decoration: none; color: inherit; display: block; background: #f8fafc; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="height: 200px; width: 100%; overflow: hidden;">
+                    <img src="<?= base_url($item['image']) ?>" alt="<?= esc($item['title']) ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </div>
+                <div style="padding: 20px;">
+                    <div style="font-size: 0.8rem; color: var(--color-primary); font-weight: 600; margin-bottom: 8px;">
+                        <?= date('d F Y', strtotime($item['created_at'])) ?>
+                    </div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 10px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        <?= esc($item['title']) ?>
+                    </h3>
+                    <p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0;">
+                        <?= strip_tags($item['content']) ?>
+                    </p>
+                </div>
+            </a>
+            <?php endforeach; ?>
+        </div>
+        <?php else: ?>
+        <div class="text-center reveal" style="padding: 3rem 0; color: #64748b;">
+            <p>Belum ada berita yang tersedia saat ini.</p>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+
 <!-- 3b. Information Section -->
-<section class="section-padding" id="informasi">
+<section class="section-padding" id="informasi" style="background-color: #f8fafc;">
     <div class="container">
         <div class="section-header reveal">
             <div class="section-header-left">
@@ -459,7 +501,7 @@
 </div>
 
 <!-- 4. Map Section -->
-<section class="section-padding" style="background-color: var(--color-bg-cool);" id="map">
+<section class="section-padding" style="background-color: #f0fdfa;" id="map">
     <div class="container">
         <div class="map-home-grid">
             <div class="map-home-preview reveal"
@@ -538,7 +580,7 @@
 </section>
 
 <!-- 5. Contact Section -->
-<section class="section-padding contact-home-section" id="contact">
+<section class="section-padding contact-home-section" id="contact" style="background-color: var(--color-white);">
     <div class="container">
         <div class="contact-home-card reveal">
             <div class="contact-home-left">
@@ -710,9 +752,8 @@ function openVideoModal(title, youtubeId, description) {
     }
     
     if(modalIframe) {
-        // Add origin to help with some domain restrictions
-        const origin = window.location.origin;
-        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&origin=' + encodeURIComponent(origin);
+        // Note: Removing origin parameter as it can cause Error 153 on some hosting environments
+        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0';
     }
     
     if(modal) {

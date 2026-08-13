@@ -70,9 +70,17 @@ class Home extends BaseController
         $infoModel = new \App\Models\InformationModel();
         $information = $infoModel->orderBy('id', 'DESC')->findAll(8);
 
-        // Fetch Shorts
         $shortModel = new \App\Models\ShortModel();
         $shorts = $shortModel->orderBy('id', 'DESC')->findAll(4);
+
+        // Fetch Latest News
+        $newsModel = new \App\Models\NewsModel();
+        $newsImageModel = new \App\Models\NewsImageModel();
+        $latestNews = $newsModel->orderBy('created_at', 'DESC')->findAll(3);
+        foreach ($latestNews as &$n) {
+            $mainImg = $newsImageModel->getMainImage($n['id']);
+            $n['image'] = $mainImg ? $mainImg['image_path'] : 'assets/images/placeholder.jpg';
+        }
 
         $settingModel = new \App\Models\SettingModel();
         $settings = $settingModel->getAllSettingsAsMap();
@@ -84,6 +92,7 @@ class Home extends BaseController
             'gallery' => $gallery,
             'information' => $information,
             'shorts' => $shorts,
+            'latest_news' => $latestNews,
             'settings' => $settings,
             'pageStyles' => ['home.css', 'map.css', 'gallery.css', 'shorts.css'],
             'pageScripts' => ['gallery.js', 'slider.js', 'map.js']

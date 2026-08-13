@@ -24,6 +24,9 @@ $isHome = url_is('/');
                     <a href="<?= $isHome ? '#shorts' : base_url('#shorts') ?>" class="nav-link <?= url_is('shorts') ? 'active' : '' ?>" data-section="shorts">Shorts</a>
                 </li>
                 <li>
+                    <a href="<?= $isHome ? '#berita' : base_url('#berita') ?>" class="nav-link" data-section="berita">Berita</a>
+                </li>
+                <li>
                     <a href="<?= $isHome ? '#informasi' : base_url('#informasi') ?>" class="nav-link" data-section="informasi">Informasi</a>
                 </li>
                 <li>

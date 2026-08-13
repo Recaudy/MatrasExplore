@@ -5,7 +5,7 @@
 <div class="admin-card">
     <div class="admin-card-header">
         <h4>Kelola Data Destinasi Pantai</h4>
-        <a href="<?= base_url('admin/destinations/create') ?>" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, var(--color-primary), #0d9488);">
+        <a href="<?= base_url('admin/destinations/create') ?>" class="btn btn-primary btn-sm">
             + Tambah Destinasi Baru
         </a>
     </div>
@@ -24,7 +24,7 @@
             <tbody>
                 <?php foreach ($destinations as $dest): ?>
                     <tr>
-                        <td style="width: 90px;">
+                        <td>
                             <img src="<?= base_url($dest['image']) ?>" alt="<?= esc($dest['name']) ?>" style="width: 80px; height: 55px; object-fit: cover; border-radius: 8px;">
                         </td>
                         <td>

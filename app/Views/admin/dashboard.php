@@ -17,7 +17,7 @@
     <div class="admin-stat-card">
         <div class="stat-info">
             <span>Pending Review</span>
-            <h3 style="color: #d97706;"><?= esc($stats['pending_reviews']) ?></h3>
+            <h3><?= esc($stats['pending_reviews']) ?></h3>
         </div>
         <div class="stat-icon amber">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
@@ -27,7 +27,7 @@
     <div class="admin-stat-card">
         <div class="stat-info">
             <span>Pending Foto Wisatawan</span>
-            <h3 style="color: #0d9488;"><?= esc($stats['pending_photos']) ?></h3>
+            <h3><?= esc($stats['pending_photos']) ?></h3>
         </div>
         <div class="stat-icon teal">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
@@ -47,16 +47,16 @@
     <div class="admin-stat-card">
         <div class="stat-info">
             <span>Total Pengunjung Web</span>
-            <h3 style="color: #6366f1;"><?= esc($stats['total_visitors']) ?></h3>
+            <h3><?= esc($stats['total_visitors']) ?></h3>
         </div>
-        <div class="stat-icon" style="background-color: #e0e7ff; color: #4f46e5;">
+        <div class="stat-icon blue">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         </div>
     </div>
 </div>
 
 <!-- Moderation Grid -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem;">
+<div class="admin-grid-2">
     <!-- Pending Reviews Card -->
     <div class="admin-card">
         <div class="admin-card-header">
@@ -64,9 +64,9 @@
             <a href="<?= base_url('admin/reviews') ?>" class="btn btn-secondary btn-sm">Lihat Semua Review</a>
         </div>
         <?php if (empty($pending_reviews)): ?>
-            <div style="padding: 2.5rem; text-align: center; color: #64748b;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 10px display: block;"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
-                <p style="margin: 0; font-weight: 600;">Tidak ada review yang menanti persetujuan. Semua aman!</p>
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                <p>Tidak ada review yang menanti persetujuan. Semua aman!</p>
             </div>
         <?php else: ?>
             <div class="table-responsive">
@@ -114,9 +114,9 @@
             <a href="<?= base_url('admin/photos') ?>" class="btn btn-secondary btn-sm">Lihat Semua Foto</a>
         </div>
         <?php if (empty($pending_photos)): ?>
-            <div style="padding: 2.5rem; text-align: center; color: #64748b;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 10px display: block;"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
-                <p style="margin: 0; font-weight: 600;">Tidak ada foto kontributor yang menunggu verifikasi.</p>
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                <p>Tidak ada foto kontributor yang menunggu verifikasi.</p>
             </div>
         <?php else: ?>
             <div class="table-responsive">

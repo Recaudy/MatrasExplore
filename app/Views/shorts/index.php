@@ -86,9 +86,8 @@ function openVideoModal(title, youtubeId, description) {
     }
     
     if(modalIframe) {
-        // Add origin to help with some domain restrictions
-        const origin = window.location.origin;
-        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&origin=' + encodeURIComponent(origin);
+        // Note: Removing origin parameter as it can cause Error 153 on some hosting environments
+        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0';
     }
     
     if(modal) {

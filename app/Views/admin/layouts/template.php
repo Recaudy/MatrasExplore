@@ -74,6 +74,14 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= base_url('admin/news') ?>" class="<?= ($active_tab ?? '') === 'news' ? 'active' : '' ?>">
+                        <div class="menu-left">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                            <span>Manajemen Berita</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
                     <a href="<?= base_url('admin/reviews') ?>" class="<?= ($active_tab ?? '') === 'reviews' ? 'active' : '' ?>">
                         <div class="menu-left">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
@@ -98,6 +106,12 @@
                     </a>
                 </li>
             </ul>
+            <div style="padding: 1rem; border-top: 1px solid var(--admin-border);">
+                <a href="<?= base_url('auth/logout') ?>" style="display: flex; align-items: center; gap: 14px; padding: 14px 18px; color: #ef4444; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 0.95rem; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#fee2e2'" onmouseout="this.style.backgroundColor='transparent'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span>Keluar</span>
+                </a>
+            </div>
         </aside>
 
         <!-- Main Body -->
@@ -108,20 +122,12 @@
                     <h3><?= esc($header_title ?? 'Dashboard Admin') ?></h3>
                 </div>
                 <div class="topbar-user">
-                    <a href="<?= base_url() ?>" target="_blank" class="btn btn-secondary btn-sm" style="background: #f1f5f9; color: var(--color-dark); border: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        Lihat Website
-                    </a>
                     <div class="user-profile">
                         <div class="user-avatar">
                             <?= strtoupper(substr(session()->get('admin_name') ?: 'A', 0, 1)) ?>
                         </div>
                         <span style="font-weight: 700; font-size: 0.95rem; color: var(--color-dark);"><?= esc(session()->get('admin_name') ?: 'Administrator') ?></span>
                     </div>
-                    <a href="<?= base_url('auth/logout') ?>" class="btn btn-primary btn-sm" style="background: #ef4444; color: white; padding: 8px 16px; border: none; box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                        Keluar
-                    </a>
                 </div>
             </header>
 

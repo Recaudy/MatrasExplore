@@ -20,6 +20,10 @@ $routes->get('gallery/(:segment)', 'Gallery::detail/$1');
 // Shorts
 $routes->get('shorts', 'Shorts::index');
 
+// Berita
+$routes->get('news', 'News::index');
+$routes->get('news/(:segment)', 'News::detail/$1');
+
 // Informasi
 $routes->get('informasi', 'Information::index');
 
@@ -70,6 +74,16 @@ $routes->post('gallery/bulk-update-dashboard', 'Admin::bulkUpdateDashboard');
     $routes->get('information', 'Admin::information');
     $routes->post('information/save', 'Admin::saveInformation');
     $routes->get('information/delete/(:num)', 'Admin::deleteInformation/$1');
+
+    // News Management
+    $routes->get('news', 'AdminNews::index');
+    $routes->get('news/create', 'AdminNews::create');
+    $routes->post('news/save', 'AdminNews::save');
+    $routes->get('news/edit/(:num)', 'AdminNews::edit/$1');
+    $routes->post('news/update/(:num)', 'AdminNews::update/$1');
+    $routes->get('news/delete/(:num)', 'AdminNews::delete/$1');
+    $routes->get('news/set-main-image/(:num)/(:num)', 'AdminNews::setMainImage/$1/$2');
+    $routes->get('news/delete-image/(:num)', 'AdminNews::deleteImage/$1');
 
     // Map Management
     $routes->get('map', 'Admin::map');

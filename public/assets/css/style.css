@@ -159,14 +159,14 @@ input, textarea, select, button {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--color-primary), #0d9488);
+    background-color: var(--color-primary);
     color: #ffffff !important;
     border-color: transparent;
     box-shadow: 0 4px 14px rgba(10, 168, 167, 0.35);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #0d9488, #0f766e);
+    background-color: var(--color-primary-dark);
     color: #ffffff !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(10, 168, 167, 0.45);

@@ -2,20 +2,15 @@
 
 <?= $this->section('content') ?>
 <div class="admin-content-inner">
-    <div class="admin-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-        <div>
-            <h2 class="admin-page-title">Manajemen Informasi</h2>
-            <p class="admin-page-subtitle">Kelola poster informasi seperti harga sewa dan fasilitas.</p>
-        </div>
-        <button class="btn btn-primary" onclick="openAddModal()" style="display: inline-flex; align-items: center; gap: 8px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            Tambah Informasi
-        </button>
-    </div>
-
     <!-- Data Table -->
     <div class="admin-card">
-        <div style="overflow-x: auto;">
+        <div class="admin-card-header">
+            <h4>Manajemen Informasi</h4>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddModal()">
+                + Tambah Informasi
+            </button>
+        </div>
+        <div class="table-responsive">
             <table class="admin-table">
                 <thead>
                     <tr>

@@ -15,24 +15,14 @@
     }
 
     .main-counter-card {
-        background: linear-gradient(145deg, #ffffff, #f0ffff);
+        background: #ffffff;
         border-radius: 24px;
         padding: 3rem 2rem;
         text-align: center;
-        box-shadow: 0 10px 40px -10px rgba(0,200,200,0.15);
-        border: 1px solid rgba(255,255,255,0.8);
+        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+        border: 1px solid #f1f5f9;
         position: relative;
         overflow: hidden;
-    }
-    .main-counter-card::before {
-        content: '';
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 150px;
-        height: 150px;
-        background: radial-gradient(circle, rgba(6,182,212,0.1) 0%, rgba(255,255,255,0) 70%);
-        border-radius: 50%;
     }
 
     .counter-icon {
@@ -242,9 +232,6 @@
     }
 </style>
 
-<div style="margin-bottom: 10px;">
-    <p style="color: #64748b; font-size: 0.95rem;">Catat jumlah pengunjung yang memasuki kawasan wisata hari ini.</p>
-</div>
 
 <div class="entrance-container">
     <!-- Main Counter Card -->
