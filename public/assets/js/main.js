@@ -26,15 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     internalLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            if (!targetId || targetId === '#' || targetId.startsWith('http') || !targetId.startsWith('#')) return;
             
-            const targetEl = document.querySelector(targetId);
-            if (targetEl) {
-                e.preventDefault();
-                targetEl.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            try {
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    e.preventDefault();
+                    targetEl.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            } catch(err) {
+                // Ignore invalid selector errors
             }
         });
     });

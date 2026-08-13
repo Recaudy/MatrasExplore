@@ -86,8 +86,9 @@ function openVideoModal(title, youtubeId, description) {
     }
     
     if(modalIframe) {
-        // Note: Removing origin parameter as it can cause Error 153 on some hosting environments
-        modalIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0';
+        // Use youtube-nocookie to avoid AdBlocker blocking tracking scripts which sometimes causes player errors
+        // Append origin explicitly to avoid Error 153 on some hosting environments
+        modalIframe.src = 'https://www.youtube-nocookie.com/embed/' + youtubeId + '?autoplay=1&modestbranding=1&rel=0&origin=' + encodeURIComponent(window.location.origin);
     }
     
     if(modal) {
